@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Ventiver Servicios</title>
+    <link rel="stylesheet" href="productos.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo-removebg-preview.png" alt="Logo Ventiver Servicios">
+        </div>
+        <h1>Productos</h1>
+        <div class="menu-icon" id="menu-toggle">&#9776;</div>
+    </header>
+
+    <nav id="nav-menu">
+        <div class="close-btn" id="close-btn">&times;</div> 
+        <h3>Menú</h3>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="user.html">Manual de Usuario</a></li>
+            <li><a href="catalogo nvo vent.pdf" target="_blank">Catálogo (Descargar PDF)</a></li>
+            <li><a href="contacto.html">Contactar</a></li>
+            <li><a href="informes.html">Infórmanos sobre algún error en la plataforma</a></li>
+            <li><a href="inventario.html">Inventario</a></li>
+            <li><a href="sucursales.html">Sucursales</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>Catálogo de Productos</h2>
+
+        <div class="product">
+            <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Producto 1">
+            <h3>Extractor Axial</h3>
+            <button class="btn" onclick="window.location.href='producto1.html';">Ver detalles</button>
+        </div>
+        <div class="product">
+            <img src="3.png" alt="Producto 2">
+            <h3>Extractor de uso comercial</h3>
+            <button class="btn" onclick="window.location.href='comersial.html';">Ver detalles</button>
+        </div>
+        <div class="product">
+            <img src="tubo1.png" alt="Producto 3">
+            <h3>Turbo Axial</h3>
+            <button class="btn" onclick="window.location.href='tubo.html';">Ver detalles</button>
+        </div>
+        
+        <div class="product">
+            <img src="tubo a.png" alt="Producto 5">
+            <h3>Tubo axial blanco 6"</h3>
+            <button class="btn" onclick="window.location.href='tuboA.html';">Ver detalles</button>
+        </div>
+        <div class="product">
+            <img src="tuboB.png" alt="Producto 6">
+            <h3>Tubo axial 12"</h3>
+            <button class="btn" onclick="window.location.href='tuboB.html';">Ver detalles</button>
+        </div>
+        <div class="product">
+            <img src="cebolla.png" alt="Producto 7">
+            <h3>Éolicos</h3>
+            <button class="btn" onclick="window.location.href='eo.html';">Ver detalles</button>
+        </div>
+
+    <div class="product">
+        <img src="ongo.png" alt="Producto 7">
+        <h3>Extractores tipo hongo</h3>
+        <button class="btn" onclick="window.location.href='hongo.html';">Ver detalles</button>
+ 
+</div>
+
+<div class="product">
+    <img src="nombre.png" alt="Producto 7">
+    <h3>Turbo axial</h3>
+    <button class="btn" onclick="window.location.href='eo.html';">Ver detalles</button>
+
+</div>
+
+
+    <footer>
+        <p>Síguenos en nuestras redes sociales:</p>
+        <ul>
+            <li><a href="https://www.facebook.com/tu-perfil" target="_blank">
+                <img src="facebook.png" alt="Facebook" class="social-icon"></a></li>
+            <li><a href="https://www.tiktok.com/@tu-usuario" target="_blank">
+                <img src="tik tok.png" alt="TikTok" class="social-icon"></a></li>
+            <li><a href="https://wa.me/tu-número-de-whatsapp" target="_blank">
+                <img src="whatsapp.png" alt="WhatsApp" class="social-icon"></a></li>
+        </ul>
+        <p>Desarrollado por [BSU] Binary System Universal | Fecha de creación: 2024-09-19</p>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').onclick = function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('show');
+            navMenu.classList.remove('hide');
+        };
+
+        document.getElementById('close-btn').onclick = function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.add('hide');
+            setTimeout(function() {
+                navMenu.classList.remove('show');
+            }, 300);
+        };
+    </script>
+</body>
+</htmsls>

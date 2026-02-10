@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos - Sucursal </title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: #003366;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* CONTENEDOR */
+.container {
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* TARJETA DE EQUIPO */
+.product {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* IMAGEN */
+.product img {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* INFO */
+.product-info {
+    flex: 1;
+    min-width: 260px;
+}
+
+.product-info h3 {
+    margin-top: 0;
+}
+
+.price {
+    font-size: 20px;
+    color: #0066cc;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* BOTONES */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.actions a,
+.actions button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.btn-tech {
+    background: #555;
+    color: #fff;
+}
+
+.btn-contact {
+    background: #003366;
+    color: #fff;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: #fff;
+}
+
+.btn-fav {
+    background: #ffcc00;
+}
+
+/* ALERTA FLOTANTE */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #d9534f;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+    display: none;
+}
+
+.alert button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    float: right;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    background: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<button class="back-button" onclick="window.location.href='sucursales.html'">
+    ← Regresar
+</button>
+
+    <h1>Sucursal Ejercito Mexicano</h1>
+</header>
+
+<div class="container">
+
+    <!-- ================== EQUIPO / EXTRACTOR ================== -->
+    <div class="product" data-id="extractor-16">
+        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
+
+        <div class="product-info">
+            <h3>EXTRACTOR AXIAL DE 16"</h3>
+            <p>EXTRACTOR AXIAL DE 16" 1/2 HP MOTOR DIRECTO</p>
+
+            <div class="price">$7,470.40</div>
+
+            <div class="actions">
+
+                <!-- FICHA TÉCNICA (PDF) -->
+                <!-- Si NO hay PDF, deja href vacío -->
+                <a href="" class="btn-tech" onclick="verFicha(event, this)">
+                    Ficha técnica
+                </a>
+
+                <!-- WHATSAPP (MENSAJE AUTOMÁTICO SEGÚN TÍTULO) -->
+                <button class="btn-whatsapp" onclick="contactarWhats(this)">
+                    Contactar sucursal (WhatsApp)
+                </button>
+
+                <button class="btn-fav" onclick="toggleFavorite(this)">
+                    ⭐ Favorito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔁 COPIA TODO ESTE BLOQUE .product PARA AGREGAR OTRO EQUIPO -->
+    <!-- SOLO CAMBIA: IMAGEN, H3, DESCRIPCIÓN, PRECIO Y data-id -->
+
+</div>
+
+<footer>
+© 2024 Ventiver Servicios
+</footer>
+
+<!-- ALERTA -->
+<div class="alert" id="alerta">
+    <button onclick="cerrarAlerta()">✖</button>
+    No hay ficha técnica disponible para este equipo.
+</div>
+
+<script>
+/* FAVORITOS */
+function toggleFavorite(btn) {
+    const product = btn.closest('.product');
+    const id = product.dataset.id;
+
+    let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+    if (favs.includes(id)) {
+        favs = favs.filter(f => f !== id);
+        btn.textContent = "⭐ Favorito";
+    } else {
+        favs.push(id);
+        btn.textContent = "✅ En favoritos";
+    }
+
+    localStorage.setItem('favoritos', JSON.stringify(favs));
+}
+
+/* CARGAR FAVORITOS */
+document.querySelectorAll('.product').forEach(product => {
+    const id = product.dataset.id;
+    let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+    if (favs.includes(id)) {
+        product.querySelector('.btn-fav').textContent = "✅ En favoritos";
+    }
+});
+
+/* WHATSAPP AUTOMÁTICO SEGÚN EQUIPO */
+function contactarWhats(btn) {
+    const product = btn.closest('.product');
+    const titulo = product.querySelector('h3').innerText;
+
+    const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Villahermosa. ¿Me pueden dar información?`;
+    const url = `https://wa.me/529931207030?text=${encodeURIComponent(mensaje)}`;
+
+    window.open(url, '_blank');
+}
+
+/* FICHA TÉCNICA */
+function verFicha(e, link) {
+    if (!link.getAttribute('href')) {
+        e.preventDefault();
+        document.getElementById('alerta').style.display = 'block';
+    }
+}
+
+/* CERRAR ALERTA */
+function cerrarAlerta() {
+    document.getElementById('alerta').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

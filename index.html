@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ventiver Servicios</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body.fondo {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(0,51,102,0.04),
+            rgba(0,51,102,0.04) 10px,
+            rgba(255,255,255,0.4) 10px,
+            rgba(255,255,255,0.4) 20px
+        ),
+        linear-gradient(180deg, #f4f8fc, #eef3f9);
+}
+
+/* LOADING */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.gif-carga { width: 200px; }
+
+/* HEADER */
+header {
+    background: #003366;
+    color: #fff;
+    padding: 30px 20px 45px;
+    text-align: center;
+    position: relative;
+}
+.logo img { width: 200px; }
+
+/* BOTONES */
+.top-buttons {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    display: flex;
+    gap: 12px;
+}
+.top-buttons a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.15);
+}
+
+/* HERO */
+.main-content {
+    text-align: center;
+    padding: 90px 20px;
+}
+.main-content h2 {
+    font-size: 40px;
+    font-weight: 600;
+}
+.main-content p {
+    max-width: 700px;
+    margin: 15px auto 0;
+    font-size: 17px;
+    opacity: 0.9;
+}
+.hero-line {
+    width: 80px;
+    height: 4px;
+    background: #003366;
+    margin: 25px auto;
+    border-radius: 2px;
+}
+.btn-primary {
+    background: #003366;
+    color: #fff;
+    padding: 16px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+.btn-primary:hover {
+    background: #00509e;
+    transform: translateY(-2px);
+}
+
+/* INFO */
+.info-empresa {
+    max-width: 1100px;
+    margin: auto;
+    padding: 50px 20px;
+    text-align: center;
+}
+.info-empresa p {
+    max-width: 900px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+/* IMÁGENES */
+.sucursal-imgs {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+.sucursal-imgs img {
+    width: 320px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    animation: float 4s ease-in-out infinite;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+@keyframes float { 50% { transform: translateY(-8px); } }
+
+/* FEATURES */
+.features {
+    max-width: 1100px;
+    margin: 70px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 25px;
+    padding: 0 20px;
+}
+.feature-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.feature-box h4 {
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+/* CONFIANZA */
+.stats {
+    background: #003366;
+    color: #fff;
+    padding: 60px 20px;
+}
+.stats-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 30px;
+    text-align: center;
+}
+.stat h3 {
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+.stat p { opacity: 0.9; }
+
+/* FOOTER */
+footer {
+    background: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 18px;
+    margin-top: 60px;
+}
+
+/* ANUNCIO */
+.ad-slider {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 260px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    overflow: hidden;
+    display: none;
+}
+.ad-slider img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: none;
+}
+.ad-slider img.active { display: block; }
+.ad-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background: #f1f1f1;
+}
+.ad-dots span {
+    width: 8px;
+    height: 8px;
+    background: #bbb;
+    border-radius: 50%;
+}
+.ad-dots span.active { background: #003366; }
+
+/* MASCOTA */
+.mascota-extractor {
+    position: fixed;
+    left: 20px;
+    bottom: 110px;
+    width: 130px;
+    z-index: 998;
+    animation: flotarMascota 4s ease-in-out infinite;
+}
+.mascota-globo {
+    position: fixed;
+    left: 160px;
+    bottom: 180px;
+    background: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    max-width: 180px;
+    z-index: 998;
+}
+@keyframes flotarMascota { 50% { transform: translateY(-12px); } }
+
+/* RESPONSIVE */
+@media (max-width:768px){
+    .top-buttons{
+        position: static;
+        justify-content: center;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+    .main-content h2{ font-size:28px; }
+    .sucursal-imgs img{ width:90%; height:auto; }
+    .ad-slider,.mascota-extractor,.mascota-globo{ display:none !important; }
+}
+</style>
+</head>
+
+<body class="fondo">
+
+<div id="loading-screen">
+    <img src="axial.gif" class="gif-carga">
+</div>
+
+<div id="main-content" style="display:none">
+
+<header>
+    <div class="logo">
+        <img src="logo-removebg-preview.png">
+    </div>
+    <div class="top-buttons">
+        <a href="soporte.html">Soporte</a>
+        <a href="mas.html">Más</a>
+        <a href="terminos.html">Términos</a>
+        <a href="actualizaciones.html">Actualizaciones</a>
+    </div>
+</header>
+
+<section class="main-content">
+    <h2>Ventiver Servicios</h2>
+    <p>Soluciones profesionales en ventilación industrial</p>
+    <div class="hero-line"></div>
+    <a class="btn-primary" onclick="irSucursales()">IR A SUCURSALES</a>
+</section>
+
+<section class="info-empresa">
+    <p>Somos una empresa dedicada a la venta e instalación de ventilación industrial como: extractores axiales (motor directo o traccion banda polea), turbo axiales, eolicos, centrifugos, tipo hongo, campanas y ducteria cuadrada.</p>
+    <div class="sucursal-imgs">
+        <img src="matriz.png">
+        <img src="aleman.png">
+        <img src="Captura de pantalla 2026-02-06 082435.png">
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-box"><h4>SERVICOS</h4><p>MENTENIMIENTO Y INSTALACIONES</p></div>
+    <div class="feature-box"><h4>VISITAS TECNICAS</h4><p>VALIDACION DE AREA</p></div>
+    <div class="feature-box"><h4>GARANTIAS</h4><p>SOLO APLICA POR DEFECTOS DE FABRICA "MOTOR QUEMADO NO SE VALIDA GARANTIA"</p></div>
+</section>
+
+<section class="stats">
+    <div class="stats-grid">
+        <div class="stat"><h3></h3><p>CONFIANZA</p></div>
+        <div class="stat"><h3></h3><p>SEGURIDAD</p></div>
+        <div class="stat"><h3></h3><p>CALIDAD</p></div>
+    </div>
+</section>
+
+<footer>© 2024 Ventiver Servicios</footer>
+</div>
+
+<div class="ad-slider" id="adSlider">
+    <img src="Anuncio1.jpg" class="active">
+    <img src="anuncio2.jpg">
+    <img src="anuncio3.jpg">
+    <img src="anuncio4.jpg">
+    <img src="anuncio5.jpg">
+    <div class="ad-dots">
+        <span class="active"></span><span></span><span></span><span></span><span></span>
+    </div>
+</div>
+
+<img src="mascota-extractor.png" class="mascota-extractor">
+<div class="mascota-globo">💨 Yo me encargo del aire…</div>
+
+<script>
+const loadingScreen=document.getElementById('loading-screen');
+const mainContent=document.getElementById('main-content');
+const adSlider=document.getElementById('adSlider');
+
+window.addEventListener('load',()=>{
+    setTimeout(()=>{
+        loadingScreen.style.display='none';
+        mainContent.style.display='block';
+        adSlider.style.display='block';
+    },2500);
+});
+
+function irSucursales(){
+    loadingScreen.style.display='flex';
+    mainContent.style.display='none';
+    setTimeout(()=>location.href='sucursales.html',2000);
+}
+
+let i=0;
+const imgs=document.querySelectorAll('.ad-slider img');
+const dots=document.querySelectorAll('.ad-dots span');
+
+setInterval(()=>{
+    imgs[i].classList.remove('active');
+    dots[i].classList.remove('active');
+    i=(i+1)%imgs.length;
+    imgs[i].classList.add('active');
+    dots[i].classList.add('active');
+},5000);
+</script>
+
+</body>
+</html>

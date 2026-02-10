@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #005a9e;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+#extractores-axiales {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.producto {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    padding: 15px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+}
+
+.producto:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.producto-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+h3 {
+    color: #005a9e;
+}
+
+.precio {
+    font-size: 18px;
+    color: #e67e22; /* Color para el precio */
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #005a9e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #004080;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #005a9e;
+    color: white;
+}
+/* Agrega esto al final de tu CSS existente */
+.producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.producto-img {
+    max-width: 100%; /* Asegura que la imagen no sobresalga */
+    height: auto;
+}
+.producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.btn {
+    margin-top: auto; /* Empuja el botón hacia abajo para que esté alineado con el resto */
+    width: 100%; /* O ajusta el tamaño según sea necesario */
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #005a9e;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Aplicar a todas las imágenes del sitio */
+img {
+    width: 200px; /* Ajusta el ancho deseado */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    object-fit: cover; /* Se asegura de que las imágenes se recorten bien si son más grandes */
+}
+
+/* Si solo quieres aplicar esto al logo */
+header .logo img {
+    width: 200px; /* Ajusta el tamaño del logo */
+    height: auto;
+}
+
+/* Para otras imágenes en secciones específicas */
+.product-image {
+    width: 200px; /* Establecer tamaño estándar */
+    height: 200px; /* Altura fija si quieres cuadrarlas */
+    object-fit: cover; /* Se asegura de que la imagen se recorte sin distorsionar */
+}

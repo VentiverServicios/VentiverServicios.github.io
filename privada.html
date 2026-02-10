@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Auditoría – Villahermosa</title>
+<style>
+body { font-family: Arial; background:#eef; padding:20px; }
+input, button { padding:8px; margin:5px 0; }
+.card { background:white; padding:10px; margin:10px 0; }
+</style>
+</head>
+<body>
+
+<h1>🔒 Auditoría – Villahermosa</h1>
+
+<input id="nombre" placeholder="Nombre del equipo">
+<input id="precio" placeholder="Precio">
+<button onclick="agregar()">➕ Agregar</button>
+
+<div id="lista"></div>
+
+<script>
+let productos = JSON.parse(localStorage.getItem("villa_productos")) || [];
+
+function guardar() {
+    localStorage.setItem("villa_productos", JSON.stringify(productos));
+}
+
+function agregar() {
+    const nombre = document.getElementById("nombre").value;
+    const precio = document.getElementById("precio").value;
+
+    if (!nombre || !precio) return alert("Campos vacíos");
+
+    productos.push({ nombre, precio });
+    guardar();
+    mostrar();
+}
+
+function eliminar(i) {
+    productos.splice(i, 1);
+    guardar();
+    mostrar();
+}
+
+function mostrar() {
+    const cont = document.getElementById("lista");
+    cont.innerHTML = "";
+    productos.forEach((p, i) => {
+        cont.innerHTML += `
+            <div class="card">
+                <b>${p.nombre}</b> - $${p.precio}
+                <button onclick="eliminar(${i})">❌</button>
+            </div>
+        `;
+    });
+}
+
+mostrar();
+</script>
+
+</body>
+</html>

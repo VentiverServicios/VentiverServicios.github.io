@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Ventiver Servicios</title>
+    <link rel="stylesheet" href="producto1.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            margin: 20px 0;
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .producto {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .producto-img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .precio {
+            color: #28a745;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='productos.html';">← Regresar</button>
+
+    <header>
+        <h1>Productos de Ventiver Servicios</h1>
+    </header>
+
+    <section id="extractores-axiales">
+        <h2>Extractores Axiales</h2>
+        <div class="productos-grid">
+            <div class="producto">
+                <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 1" class="producto-img">
+                <h3>Extractor Axial 48"</h3>
+                <p class="precio">$26,100</p>
+                <button class="btn" onclick="window.location.href='detalles.html';">Ver detalles</button>
+            </div>
+            <div class="producto">
+                <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 2" class="producto-img">
+                <h3>Extractor Axial 42"</h3>
+                <p class="precio">$20,764</p>
+                <button class="btn" onclick="window.location.href='cotizar.html';">Ver detalles</button>
+            </div>
+            <div class="producto">
+                <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 3" class="producto-img">
+                <h3>Extractor Axial 36"</h3>
+                <p class="precio">$19,604</p>
+                <button class="btn" onclick="window.location.href='cotizar.html';">Ver detalles</button>
+            </div>
+            <div class="producto">
+                <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 4" class="producto-img">
+                <h3>Extractor Axial 30"</h3>
+                <p class="precio">$14,082</p>
+                <button class="btn" onclick="window.location.href='cotizar.html';">Ver detalles</button>
+            </div>
+            <div class="producto">
+                <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 5" class="producto-img">
+                <h3>Extractor Axial 24"</h3>
+                <p class="precio">$11,031</p>
+                <button class="btn" onclick="window.location.href='cotizar.html';">Ver detalles</button>
+            </div>
+            <div class="producto">
+                <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 5" class="producto-img">
+                <h3>Extractor Axial 18"</h3>
+                <p class="precio">8,154</p>
+                <button class="btn" onclick="window.location.href='cotizar.html';">Ver detalles</button>
+        </div>
+        <div class="producto">
+            <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial Modelo 5" class="producto-img">
+            <h3>Extractor Axial 16"</h3>
+            <p class="precio">$7,470</p>
+            <button class="btn" onclick="window.location.href='cotizar.html';">Ver detalles</button>
+    </section>
+
+    <footer>
+        <p>© 2024 Ventiver Servicios. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

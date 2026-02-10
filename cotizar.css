@@ -1,0 +1,136 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sección de Cotización */
+#cotizacion-producto {
+    background-color: #f9f9f9;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#cotizacion-producto h2 {
+    color: #005a9e;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#cotizacion-producto p {
+    color: #555;
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    line-height: 1.6;
+}
+
+.quote-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.quote-form label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.quote-form select, 
+.quote-form input, 
+.quote-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.quote-form h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #005a9e;
+}
+
+.form-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-buttons .btn {
+    background-color: #005a9e;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.form-buttons .btn:hover {
+    background-color: #004080;
+}
+
+/* Estilos para la superposición de alerta */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    z-index: 1000; /* Asegura que esté en la parte superior */
+    display: flex;
+    align-items: center; /* Alinear verticalmente al centro */
+    justify-content: center; /* Alinear horizontalmente al centro */
+    visibility: hidden; /* Oculto por defecto */
+}
+
+.alert-message {
+    text-align: center;
+    background: #c25a64; /* Fondo amarillo */
+    padding: 30px; /* Aumentado para mayor tamaño */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px; /* Limitar ancho para un mejor diseño */
+}
+
+.alert-message h2 {
+    margin: 0;
+    font-size: 24px; /* Tamaño de fuente aumentado */
+}
+
+/* Animación de entrada desde abajo */
+.slide-up {
+    animation: slideUp 0.5s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Añade tuercas girando como fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('tuerquitas.gif') center center / cover no-repeat;
+    opacity: 0.1; /* Muy sutil */
+    z-index: -1; /* Detrás del contenido */
+}

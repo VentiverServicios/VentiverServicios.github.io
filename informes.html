@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Errores</title>
+    <!-- Link CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .success-message, .error-message {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .back-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Informe de Errores</h2>
+        <form id="error-form">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="tipo_error">Tipo de Error</label>
+            <input type="text" id="tipo_error" name="tipo_error" required>
+
+            <label for="descripcion">Descripción del Error</label>
+            <textarea id="descripcion" name="descripcion" rows="5" required></textarea>
+
+            <button type="submit">Enviar Informe</button>
+        </form>
+
+        <p class="success-message" id="success-message">¡Informe enviado con éxito!</p>
+        <p class="error-message" id="error-message">Hubo un problema al enviar el informe. Intenta nuevamente.</p>
+
+        <button class="back-button" onclick="window.location.href='index.html';">Regresar a Inicio</button>
+    </div>
+
+    <!-- EmailJS script -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Inicializar EmailJS
+        (function() {
+            emailjs.init("TU_USER_ID"); // Reemplaza "TU_USER_ID" con tu User ID de EmailJS
+        })();
+
+        // Manejo del formulario
+        document.getElementById('error-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const templateParams = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                tipo_error: document.getElementById('tipo_error').value,
+                descripcion: document.getElementById('descripcion').value
+            };
+
+            emailjs.send('TU_SERVICE_ID', 'TU_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('error-message').style.display = 'none';
+                    document.getElementById('error-form').reset();
+                }, function(error) {
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('success-message').style.display = 'none';
+                });
+        });
+    </script>
+</body>
+</html>

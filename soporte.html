@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte Técnico | Ventiver Servicios</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',Arial,sans-serif;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(0,51,102,0.04),
+            rgba(0,51,102,0.04) 10px,
+            rgba(255,255,255,0.4) 10px,
+            rgba(255,255,255,0.4) 20px
+        ),
+        linear-gradient(180deg,#f4f8fc,#eef3f9);
+    color:#333;
+}
+
+/* LOADING */
+#loading{
+    position:fixed;
+    inset:0;
+    background:#f4f8fc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+.loader{
+    width:90px;
+    height:90px;
+    border:10px solid #dbe4f0;
+    border-top:10px solid #003366;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* HEADER */
+header{
+    background:#003366;
+    color:#fff;
+    padding:30px 20px;
+    text-align:center;
+}
+
+/* CONTENEDOR */
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:50px 20px;
+    display:none;
+}
+
+/* SECCIONES */
+.section{
+    background:#fff;
+    padding:35px;
+    border-radius:16px;
+    margin-bottom:35px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+.section h2{
+    color:#003366;
+    margin-bottom:15px;
+}
+
+/* FORM */
+input,select,textarea{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    margin-bottom:18px;
+    font-family:inherit;
+}
+textarea{min-height:130px;}
+
+button{
+    background:#003366;
+    color:#fff;
+    border:none;
+    padding:16px 40px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+button:hover{
+    background:#00509e;
+    transform:translateY(-2px);
+}
+
+/* INFO GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+.box{
+    background:#f9fbff;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+.box h4{
+    color:#003366;
+    margin-bottom:10px;
+}
+
+/* CONSEJOS */
+.tip{
+    background:#eaf2ff;
+    padding:18px;
+    border-left:5px solid #003366;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+
+/* BOTÓN REGRESAR */
+.back{
+    display:inline-block;
+    margin-top:25px;
+    text-decoration:none;
+    color:#003366;
+    font-weight:600;
+}
+
+/* FOOTER */
+footer{
+    background:#003366;
+    color:#fff;
+    text-align:center;
+    padding:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading"><div class="loader"></div></div>
+
+<header>
+    <h1>Soporte Técnico Ventiver</h1>
+    <p>Reporte de errores, fallas, lentitud o problemas visuales</p>
+</header>
+
+<div class="container" id="contenido">
+
+<!-- FORMULARIO -->
+<div class="section">
+    <h2>📩 Reportar problema</h2>
+    <p>
+        Utiliza este sistema para reportar cualquier inconveniente del sitio.
+        Al enviar, se abrirá Gmail con el mensaje listo para enviar.
+    </p>
+
+    <input type="text" id="nombre" placeholder="Nombre (opcional)">
+    <input type="email" id="correo" placeholder="Correo de contacto">
+
+    <select id="tipo">
+        <option>Error de carga</option>
+        <option>Botón no responde</option>
+        <option>Página lenta o saturada</option>
+        <option>Error visual o diseño</option>
+        <option>Contenido incorrecto</option>
+        <option>Otro</option>
+    </select>
+
+    <textarea id="mensaje" placeholder="Describe el problema paso a paso..."></textarea>
+
+    <p style="font-size:14px;opacity:.75">
+        📎 Adjunta tu captura directamente en Gmail por seguridad del navegador.
+    </p>
+
+    <button onclick="enviarCorreo()">Enviar reporte</button>
+
+    <a href="index.html" class="back">← Regresar al inicio</a>
+</div>
+
+<!-- POSIBLES SOLUCIONES -->
+<div class="section">
+    <h2>🛠 Posibles soluciones rápidas</h2>
+    <div class="grid">
+        <div class="box">
+            <h4>Error de carga</h4>
+            <p>Recarga la página, revisa tu conexión o limpia caché.</p>
+        </div>
+        <div class="box">
+            <h4>Lentitud</h4>
+            <p>Evita múltiples pestañas abiertas o redes saturadas.</p>
+        </div>
+        <div class="box">
+            <h4>Botones no funcionan</h4>
+            <p>Actualiza el navegador o prueba modo incógnito.</p>
+        </div>
+        <div class="box">
+            <h4>Error visual</h4>
+            <p>Reduce zoom o revisa resolución de pantalla.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CONSEJOS -->
+<div class="section">
+    <h2>💡 Consejos para mejorar tu experiencia</h2>
+
+    <div class="tip">✔ Usa navegadores actualizados (Chrome, Edge, Firefox).</div>
+    <div class="tip">✔ Mantén una conexión estable.</div>
+    <div class="tip">✔ Limpia caché si visitas seguido el sitio.</div>
+    <div class="tip">✔ Evita extensiones que bloqueen scripts.</div>
+    <div class="tip">✔ Reporta cualquier falla para mejorar el servicio.</div>
+</div>
+
+<!-- IMPORTANCIA -->
+<div class="section">
+    <h2>📊 ¿Por qué es importante tu reporte?</h2>
+    <p>
+        Cada reporte ayuda a mejorar la estabilidad, seguridad y rendimiento del sitio.
+        Tu información nos permite corregir errores rápidamente y ofrecer un servicio
+        más confiable para todos los clientes.
+    </p>
+</div>
+
+</div>
+
+<footer>© 2024 Ventiver Servicios</footer>
+
+<script>
+window.addEventListener('load',()=>{
+    setTimeout(()=>{
+        loading.style.display='none';
+        contenido.style.display='block';
+    },1500);
+});
+
+function enviarCorreo(){
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const tipo = document.getElementById('tipo').value;
+    const mensaje = document.getElementById('mensaje').value;
+
+    const body = `
+REPORTE DE SOPORTE - VENTIVER
+
+Nombre: ${nombre}
+Correo: ${correo}
+Tipo de problema: ${tipo}
+
+Descripción detallada:
+${mensaje}
+
+Adjunta aquí la captura del error.
+`;
+
+    const gmail =
+`https://mail.google.com/mail/?view=cm&fs=1&to=ventiversoporteweb@gmail.com&su=Reporte de problema web - Ventiver&body=${encodeURIComponent(body)}`;
+
+    window.open(gmail,'_blank');
+}
+</script>
+
+</body>
+</html>

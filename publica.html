@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Equipos – Villahermosa</title>
+<style>
+body { font-family: Arial; background:#f4f4f9; padding:20px; }
+.card {
+    background:white;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:8px;
+}
+</style>
+</head>
+<body>
+
+<h1>📦 Equipos disponibles – Villahermosa</h1>
+
+<div id="lista"></div>
+
+<script>
+const datos = JSON.parse(localStorage.getItem("villa_productos")) || [];
+
+const contenedor = document.getElementById("lista");
+
+if (datos.length === 0) {
+    contenedor.innerHTML = "<p>No hay equipos disponibles.</p>";
+}
+
+datos.forEach(p => {
+    contenedor.innerHTML += `
+        <div class="card">
+            <h3>${p.nombre}</h3>
+            <p>Precio: $${p.precio}</p>
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>

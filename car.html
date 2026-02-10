@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Ventiver Servicios</title>
+    <link rel="stylesheet" href="carrito.css">
+</head>
+<body>
+    <header>
+        <h1>Carrito de Compras</h1>
+    </header>
+
+    <div class="cart-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+        </table>
+        <p id="total-price">Total: $0</p>
+    </div>
+
+    <script>
+       
+        function mostrarCarrito() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const cartItems = document.getElementById("cart-items");
+            let total = 0;
+            cartItems.innerHTML = "";
+
+            carrito.forEach(producto => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${producto.nombre}</td>
+                    <td>$${producto.precio}</td>
+                `;
+                cartItems.appendChild(row);
+                total += producto.precio;
+            });
+
+            document.getElementById("total-price").innerText = "Total: $" + total;
+        }
+
+    
+        document.addEventListener("DOMContentLoaded", mostrarCarrito);
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucursales - Ventiver Servicios</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            background: #003366;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            background: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #004a99;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .branch {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideIn 1s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .branch img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .branch h3 {
+            background: #003366;
+            color: #fff;
+            margin: 0;
+            padding: 10px;
+        }
+        .branch p {
+            padding: 10px;
+            line-height: 1.5;
+        }
+
+        /* BOTON VER PRODUCTOS */
+        .btn-sucursal {
+            display: block;
+            margin: 15px auto 20px;
+            background: #0066cc;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: background 0.3s;
+        }
+        .btn-sucursal:hover {
+            background: #004a99;
+        }
+
+        footer {
+            background: #003366;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <button class="back-button" onclick="window.location.href='index.html';">← Regresar</button>
+    <h1>Sucursales de Ventiver</h1>
+</header>
+
+<div class="container">
+
+    <!-- Villahermosa -->
+    <div class="branch">
+        <a href="https://www.google.com.mx/maps/search/Ventiver+pereferico/@17.9686486,-92.9674008,52m/data=!3m1!1e3!5m1!1e4" target="_blank">
+            <img src="noob.jpeg" alt="Villahermosa, Tabasco">
+        </a>
+        <h3>Villahermosa, Tabasco</h3>
+        <p>
+            Dirección: Periférico Carlos Pellicer Cámara No. 156.  
+            Col. Punta Brava, Villahermosa, Tabasco.<br>
+            Teléfono: 993 120 7030
+        </p>
+        <a class="btn-sucursal" href="villahermosa.html">
+                IR A SUCURSAL
+        </a>
+    </div>
+
+    <!-- Veracruz Ejército Mexicano -->
+    <div class="branch">
+        <a href="https://www.google.com.mx/maps/place/Ventiver/@19.1425491,-96.1242821" target="_blank">
+            <img src="Captura de pantalla 2026-02-06 082435.png" alt="Puerto de Veracruz">
+        </a>
+        <h3>Puerto de Veracruz</h3>
+        <p>
+            Dirección: Av. Paseo Ejército Mexicano #220  
+            Col. Ejido Primero de Mayo, Boca del Río, Ver.<br>
+            Teléfono: 229 449 70 53
+        </p>
+        <a class="btn-sucursal" href="ejercito.html">
+            IR A SUCURSAL
+        </a>
+    </div>
+
+    <!-- Miguel Alemán -->
+    <div class="branch">
+        <a href="https://maps.app.goo.gl/DjzLoiJaPcUb2H7R7" target="_blank">
+            <img src="aleman.png" alt="Sucursal Miguel Alemán">
+        </a>
+        <h3>Puerto de Veracruz</h3>
+        <p>
+            SUCURSAL MIGUEL ALEMÁN<br>
+            Av. Miguel Alemán #1, Col. Artículo 123<br>
+            C.P. 91947<br>
+            Tel. 229 980 4171
+        </p>
+        <a class="btn-sucursal" href="aleman.html">
+           IR A SUCURSAL
+        </a>
+    </div>
+
+    <!-- Matriz -->
+    <div class="branch">
+        <a href="https://maps.app.goo.gl/2t6qHHjnPAifkUf47" target="_blank">
+            <img src="matriz.png" alt="Matriz Ventiver">
+        </a>
+        <h3>Puerto de Veracruz</h3>
+        <p>
+            VENTIVER SERVICIOS MATRIZ<br>
+            Av. Miguel Alemán #3285, Col. Adolfo López Mateos<br>
+            Tel. 229 260 02 35<br>
+        </p>
+        <a class="btn-sucursal" href="matriz.html">
+           IR A SUCURSAL
+        </a>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2024 Ventiver Servicios. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
+}

@@ -1,0 +1,115 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo img {
+    width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+}
+
+/* Navegación */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Secciones */
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para preguntas frecuentes */
+.faq {
+    margin: 10px 0;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    overflow: hidden; /* Para que las respuestas ocultas no salgan del borde */
+}
+
+.faq h3 {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.faq h3:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+/* Opciones adicionales */
+.options {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-radius: 5px;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer ul li img {
+    width: 30px; /* Ajusta el tamaño de los íconos de redes sociales */
+    vertical-align: middle;
+}

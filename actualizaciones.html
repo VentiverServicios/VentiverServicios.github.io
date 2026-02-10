@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualizaciones | Ventiver Servicios</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',Arial,sans-serif;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(0,51,102,0.04),
+            rgba(0,51,102,0.04) 10px,
+            rgba(255,255,255,0.4) 10px,
+            rgba(255,255,255,0.4) 20px
+        ),
+        linear-gradient(180deg,#f4f8fc,#eef3f9);
+    color:#333;
+}
+
+/* LOADING */
+#loading{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f4f8fc;
+    z-index:9999;
+}
+.loader{
+    width:70px;
+    height:70px;
+    border:8px solid #dbe4f0;
+    border-top:8px solid #003366;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* HEADER */
+header{
+    background:#003366;
+    color:#fff;
+    padding:35px 20px;
+    text-align:center;
+}
+
+/* CONTENEDOR */
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:50px 20px;
+    display:none;
+}
+
+/* SECCIONES */
+.section{
+    background:#fff;
+    padding:35px;
+    border-radius:16px;
+    margin-bottom:35px;
+    box-shadow:0 12px 28px rgba(0,0,0,0.08);
+}
+.section h2{
+    color:#003366;
+    margin-bottom:15px;
+}
+.section p{
+    line-height:1.8;
+    margin-bottom:12px;
+}
+
+/* TIMELINE */
+.update{
+    border-left:4px solid #003366;
+    padding-left:20px;
+    margin-bottom:25px;
+}
+.update span{
+    font-size:13px;
+    color:#666;
+}
+
+/* DESTACADO */
+.highlight{
+    background:#eaf2fb;
+    border-left:5px solid #003366;
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:25px;
+}
+
+/* BOTÓN */
+.back{
+    display:inline-block;
+    margin-top:25px;
+    text-decoration:none;
+    font-weight:600;
+    color:#003366;
+}
+
+/* FOOTER */
+footer{
+    background:#003366;
+    color:#fff;
+    text-align:center;
+    padding:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading"><div class="loader"></div></div>
+
+<header>
+    <h1>Actualizaciones del Sitio</h1>
+    <p>Mejoras, cambios y evolución continua</p>
+</header>
+
+<div class="container" id="contenido">
+
+<div class="highlight">
+    🚀 Este sitio se encuentra en constante mejora para ofrecer una experiencia
+    más rápida, segura y profesional.
+</div>
+
+<!-- HISTORIAL -->
+<div class="section">
+    <h2>Historial de cambios</h2>
+
+    <div class="update">
+        <h4>Optimización general del sitio</h4>
+        <span>Última actualización</span>
+        <p>
+            Se mejoró el rendimiento general, tiempos de carga y estabilidad
+            visual en computadoras, tablets y dispositivos móviles.
+        </p>
+    </div>
+
+    <div class="update">
+        <h4>Nuevo sistema de carga inicial</h4>
+        <span>Implementación reciente</span>
+        <p>
+            Se agregó una pantalla de carga animada para garantizar que todo el
+            contenido se muestre correctamente antes de interactuar con el sitio.
+        </p>
+    </div>
+
+    <div class="update">
+        <h4>Mejoras visuales y diseño</h4>
+        <span>Diseño actualizado</span>
+        <p>
+            Ajustes en colores, tipografía, secciones informativas y animaciones
+            para una apariencia más moderna y profesional.
+        </p>
+    </div>
+
+    <div class="update">
+        <h4>Sistema de anuncios informativos</h4>
+        <span>Nueva función</span>
+        <p>
+            Se integró un módulo visual para mostrar anuncios importantes sobre
+            productos y novedades de Ventiver Servicios.
+        </p>
+    </div>
+
+    <div class="update">
+        <h4>Secciones legales y de soporte</h4>
+        <span>Contenido agregado</span>
+        <p>
+            Se añadieron páginas dedicadas a soporte, términos de uso, cookies
+            y políticas de información para mayor transparencia.
+        </p>
+    </div>
+</div>
+
+<!-- FUTURO -->
+<div class="section">
+    <h2>Próximas mejoras</h2>
+    <ul>
+        <li>Optimización avanzada para SEO.</li>
+        <li>Panel administrativo interno.</li>
+        <li>Mayor interacción visual.</li>
+        <li>Integración con sistemas de contacto rápido.</li>
+    </ul>
+</div>
+
+<!-- DESARROLLADOR -->
+<div class="section">
+    <h2>Desarrollo web & contacto profesional</h2>
+    <p>
+        Este sitio ha sido desarrollado y mantenido de forma personalizada,
+        cuidando el rendimiento, la seguridad y la experiencia del usuario.
+    </p>
+
+    <p>
+        Si estás interesado en un proyecto web, landing page, sitio corporativo
+        o mejoras técnicas, puedes ponerte en contacto directamente:
+    </p>
+
+    <p><strong>📧 binarysystemweb@gmail.com</strong></p>
+
+    <p>
+        Soluciones modernas, diseño limpio y desarrollo enfocado en resultados.
+    </p>
+
+    <a href="index.html" class="back">← Regresar al inicio</a>
+</div>
+
+</div>
+
+<footer>© 2024 Ventiver Servicios</footer>
+
+<script>
+window.addEventListener('load',()=>{
+    setTimeout(()=>{
+        loading.style.display='none';
+        contenido.style.display='block';
+    },1500);
+});
+</script>
+
+</body>
+</html>

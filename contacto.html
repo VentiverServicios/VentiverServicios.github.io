@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Ventiver Servicios</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .logo img {
+            width: 120px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e1e1e1;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-option h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .contact-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                width: 60%;
+            }
+
+            .contact-option {
+                padding: 15px 30px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+<body onload="hideLoader()">
+
+    <!-- GIF de carga -->
+    <div id="loader" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 999;">
+        <img src="Inicio _ laminaire.gif" alt="Cargando..." width="120" height="120">
+    </div>
+
+    <!-- Contenido de la página -->
+    <div id="content" style="display:none;">
+        <header>
+            <div class="logo">
+                <img src="logo-removebg-preview.png" alt="Logo Ventiver Servicios">
+            </div>
+            <h1>Contacto</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="soporte.html">Soporte Técnico</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+            <h2>Contáctanos</h2>
+            <p>Elige una de las siguientes opciones para ponerte en contacto con nosotros:</p>
+
+            <div class="contact-option">
+                <h3>Enviar un correo</h3>
+                <a href="mailto:ventiver@gmail.com" class="contact-button">Enviar correo</a>
+            </div>
+
+            <div class="contact-option">
+                <h3>WhatsApp</h3>
+                <a href="https://wa.me/message/BSV34TY76QROC1" target="_blank" class="contact-button">Enviar mensaje por WhatsApp</a>
+            </div>
+
+            <div class="contact-option">
+                <h3>Facebook</h3>
+                <a href="https://www.facebook.com/VentiverMX/?locale=hr_HR&_rdr" target="_blank" class="contact-button">Visítanos en Facebook</a>
+            </div>
+
+            <div class="contact-option">
+                <h3>TikTok</h3>
+                <a href="https://www.tiktok.com/@ventiver.oficial" target="_blank" class="contact-button">Síguenos en TikTok</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 Ventiver Servicios. Todos los derechos reservados.</p>
+            <p>Desarrollado por <a href="system.html" target="_blank">[BSU] Binary System Universal</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function hideLoader() {
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

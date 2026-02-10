@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización de Productos - Ventiver Servicios</title>
+    <link rel="stylesheet" href="cotizar.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #cotizacion-producto {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .producto-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .producto-table th, .producto-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .producto-table th {
+            background: #e9e9e9;
+        }
+
+        .form-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            resize: none;
+        }
+
+        #whatsapp-link {
+            display: none;
+            margin-top: 10px;
+            background: #25D366;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #whatsapp-link:hover {
+            background: #1da851;
+        }
+
+        /* Estilo para la ventana emergente */
+        .modal {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .modal-content {
+            background-color: #28a745;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .modal-content p {
+            margin: 10px 0;
+        }
+
+        .modal .btn-close {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .modal .btn-close:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <section id="cotizacion-producto">
+        <h2>Cotizar</h2>
+        <button class="btn btn-secondary" onclick="location.href='index.html'">Regresar a Inicio</button>
+        <p>Completa el siguiente formulario para solicitar una cotización de nuestros productos.</p>
+
+        <form id="cotizacion-form">
+            <table class="producto-table" id="productos-container">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio sin IVA</th>
+                        <th>Precio con IVA</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se añadirán dinámicamente los productos -->
+                </tbody>
+            </table>
+            <button type="button" id="agregar-producto" class="btn">Añadir Equipos</button>
+
+            <div id="totales" style="margin-top: 20px;">
+                <p>Subtotal: <span id="subtotal">$0.00</span></p>
+                <p>IVA (16%): <span id="iva">$0.00</span></p>
+                <p>Total: <span id="total">$0.00</span></p>
+            </div>
+
+            <label for="detalles">Detalles adicionales:</label>
+            <textarea id="detalles" rows="4" placeholder="Ingresa especificaciones o comentarios adicionales"></textarea>
+
+            <h3>Datos de contacto</h3>
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="email" id="email" placeholder="Correo Electrónico" required>
+            <input type="tel" id="telefono" placeholder="Teléfono" required>
+
+            <label for="sucursal">Selecciona una sucursal:</label>
+            <select id="sucursal" required>
+                <option value="">--Selecciona una sucursal--</option>
+                <option value="https://api.whatsapp.com/message/BSV34TY76QROC1?autoload=1&app_absent=0">Villahermosa - Tabasco</option>
+                <option value="https://api.whatsapp.com/send?phone=52XXXXXXXXXX">Sucursal 2</option>
+                <option value="https://api.whatsapp.com/send?phone=52YYYYYYYYYY">Sucursal 3</option>
+                <option value="https://api.whatsapp.com/send?phone=52ZZZZZZZZZZ">Sucursal 4</option>
+            </select>
+
+            <a href="#" id="whatsapp-link" target="_blank">compartir contizacion por whatsapp</a>
+
+            <div class="form-buttons">
+                <button type="button" id="generar-pdf" class="btn">Generar Cotización</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Ventana emergente -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p>No olvides enviar el PDF a la sucursal deseada.</p>
+            <p>¡Gracias! Te responderemos lo antes posible de 8 AM a 6 PM.</p>
+            <button class="btn-close" onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const IVA = 0.16;
+
+        const INVENTARIO = {
+            "ventilador-industrial": { nombre: "Ventilador Industrial", precio: 1200, stock: 20 },
+            "extractor-aire": { nombre: "Extractor de Aire", precio: 800, stock: 15 },
+            "purificador-aire": { nombre: "Purificador de Aire", precio: 1500, stock: 10 }
+        }; 
+
+        // Cambia el enlace de WhatsApp dinámicamente
+        document.getElementById("sucursal").addEventListener("change", function() {
+            const whatsappLink = document.getElementById("whatsapp-link");
+            const sucursalURL = this.value;
+
+            if (sucursalURL) {
+                whatsappLink.href = sucursalURL;
+                whatsappLink.style.display = "block";
+            } else {
+                whatsappLink.style.display = "none";
+            }
+        });
+
+        // Función para actualizar precios y totales
+        function actualizarPrecios() {
+            const rows = document.querySelectorAll("#productos-container tbody tr");
+            let subtotal = 0;
+
+            rows.forEach(row => {
+                const select = row.querySelector(".producto");
+                const cantidad = parseInt(row.querySelector(".cantidad").value) || 0;
+                const key = select.value;
+
+                if (key) {
+                    const producto = INVENTARIO[key];
+                    const precioSinIVA = cantidad * producto.precio;
+                    const precioConIVA = precioSinIVA * (1 + IVA);
+
+                    subtotal += precioSinIVA;
+
+                    row.querySelector(".precio-sin-iva").textContent = `$${precioSinIVA.toFixed(2)}`;
+                    row.querySelector(".precio-con-iva").textContent = `$${precioConIVA.toFixed(2)}`;
+
+                    if (cantidad > producto.stock) {
+                        alert(`Advertencia: La cantidad solicitada de ${producto.nombre} excede el inventario disponible (${producto.stock}).`);
+                    }
+                }
+            });
+
+            const iva = subtotal * IVA;
+            const total = subtotal + iva;
+
+            document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById("iva").textContent = `$${iva.toFixed(2)}`;
+            document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Añadir producto
+        document.getElementById("agregar-producto").addEventListener("click", () => {
+            const tbody = document.querySelector("#productos-container tbody");
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td><select class="producto">
+                    <option value="">--Seleccionar Producto--</option>
+                    <option value="ventilador-industrial">Ventilador Industrial</option>
+                    <option value="extractor-aire">Extractor de Aire</option>
+                    <option value="purificador-aire">Purificador de Aire</option>
+                </select></td>
+                <td><input type="number" class="cantidad" min="0" value="0"></td>
+                <td class="precio-sin-iva">$0.00</td>
+                <td class="precio-con-iva">$0.00</td>
+                <td><button type="button" class="btn btn-secondary" onclick="eliminarProducto(this)">Eliminar</button></td>
+            `;
+            tbody.appendChild(row);
+
+            row.querySelector(".producto").addEventListener("change", actualizarPrecios);
+            row.querySelector(".cantidad").addEventListener("input", actualizarPrecios);
+        });
+
+        // Eliminar producto
+        function eliminarProducto(button) {
+            button.closest("tr").remove();
+            actualizarPrecios();
+        }
+
+        // Generar cotización y mostrar modal
+        document.getElementById("generar-pdf").addEventListener("click", () => {
+            const nombreCliente = document.getElementById("nombre").value;
+            const emailCliente = document.getElementById("email").value;
+            const telefonoCliente = document.getElementById("telefono").value;
+            const detallesCliente = document.getElementById("detalles").value;
+
+            const productosContainer = document.getElementById("productos-container");
+            const productos = productosContainer.querySelectorAll("tbody tr");
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(16);
+            doc.text("Cotización de Productos - Ventiver Servicios", 10, 10);
+
+            doc.setFontSize(12);
+            doc.text(`Nombre: ${nombreCliente}`, 10, 30);
+            doc.text(`Correo: ${emailCliente}`, 10, 40);
+            doc.text(`Teléfono: ${telefonoCliente}`, 10, 50);
+            doc.text(`Detalles: ${detallesCliente}`, 10, 60);
+
+            let yOffset = 70;
+            let subtotal = 0;
+
+            productos.forEach((row, index) => {
+                const producto = row.querySelector(".producto").selectedOptions[0].text;
+                const cantidad = row.querySelector(".cantidad").value || 0;
+                const precioSinIVA = row.querySelector(".precio-sin-iva").textContent.replace('$', '');
+                const precioConIVA = row.querySelector(".precio-con-iva").textContent.replace('$', '');
+
+                doc.text(`${index + 1}. ${producto}`, 10, yOffset);
+                doc.text(`Cantidad: ${cantidad}`, 120, yOffset);
+                doc.text(`Precio sin IVA: $${precioSinIVA}`, 170, yOffset);
+                doc.text(`Precio con IVA: $${precioConIVA}`, 230, yOffset);
+
+                subtotal += parseFloat(precioSinIVA);
+                yOffset += 30;
+
+                if (yOffset > 270) {
+                    doc.addPage();
+                    yOffset = 10;
+                }
+            });
+
+            const iva = subtotal * IVA;
+            const total = subtotal + iva;
+
+            doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 10, yOffset + 10);
+            doc.text(`IVA (16%): $${iva.toFixed(2)}`, 10, yOffset + 20);
+            doc.text(`Total: $${total.toFixed(2)}`, 10, yOffset + 30);
+
+            doc.save(`COTIZACION_CLIENTE_${nombreCliente}.pdf`);
+
+           
+            document.getElementById("modal").style.display = "flex";
+        });
+
+    
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
+O
