@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Ventiver Servicios</title>
+    <link rel="stylesheet" href="user.css">
+</head>
+<body>
+    <header>
+        <h1>Manual de Usuario</h1>
+    </header>
+
+    <main>
+        <button class="btn" id="show-manual">Mostrar Manual</button>
+        <div class="overlay" id="overlay"></div>
+        <div class="modal" id="manual-content">
+            <h2>Contenido del Manual</h2>
+            <p>Aquí encontrarás toda la información necesaria para utilizar nuestros productos.</p>
+            <p>1. Configuración inicial.</p>
+            <p>2. Mantenimiento y cuidado.</p>
+            <p>3. Resolución de problemas.</p>
+            <button class="btn" onclick="window.location.href='index.html';">Regresar a Inicio</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Ventiver Servicios. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const showManualButton = document.getElementById('show-manual');
+        const manualContent = document.getElementById('manual-content');
+        const overlay = document.getElementById('overlay');
+
+        showManualButton.addEventListener('click', () => {
+            overlay.classList.add('active');
+            manualContent.classList.add('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.classList.remove('active');
+            manualContent.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

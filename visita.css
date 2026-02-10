@@ -1,0 +1,129 @@
+/* Estilo general */
+body.fondo {
+    background-image: url('Inicio _ laminaire.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sección de Visita Técnica */
+#visita-tecnica {
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.95);
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+#visita-tecnica:hover {
+    transform: scale(1.02);
+}
+
+#visita-tecnica h2 {
+    color: #005a9e;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Estilo general */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body.fondo {
+    background-image: url('Inicio\ _\ laminaire.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sección principal */
+section {
+    flex: 1;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Menú de navegación */
+header {
+    background-color: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Pie de página */
+footer {
+    background-color: rgba(241, 241, 241, 0.9);
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+}
+
+footer ul {
+    padding: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.social-icon {
+    width: 20px; /* Tamaño reducido */
+    height: auto;
+}
+
+.social-icon:hover {
+    opacity: 0.7;
+}
+
+.footer-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.footer-icon {
+    width: 50px; /* Tamaño reducido */
+    height: auto;
+    margin-right: 10px;
+}
