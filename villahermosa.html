@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Productos - Sucursal </title>
+<title>Productos - Sucursal</title>
 
 <style>
 body {
@@ -102,11 +102,6 @@ header {
     color: #fff;
 }
 
-.btn-contact {
-    background: #003366;
-    color: #fff;
-}
-
 .btn-whatsapp {
     background: #25D366;
     color: #fff;
@@ -116,7 +111,7 @@ header {
     background: #ffcc00;
 }
 
-/* ALERTA FLOTANTE */
+/* ALERTA */
 .alert {
     position: fixed;
     top: 20px;
@@ -154,15 +149,13 @@ footer {
 
 <header>
 <button class="back-button" onclick="window.location.href='sucursales.html'">
-    ← Regresar
+← Regresar
 </button>
-
-    <h1>Sucursal Villahermosa</h1>
+<h1>Sucursal Villahermosa</h1>
 </header>
 
 <div class="container">
 
-    <!-- ================== EQUIPO / EXTRACTOR ================== -->
     <div class="product" data-id="extractor-16">
         <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
 
@@ -174,30 +167,10 @@ footer {
 
             <div class="actions">
 
-                <!-- FICHA TÉCNICA (PDF) -->
-                <!-- Si NO hay PDF, deja href vacío -->
                 <a href="" class="btn-tech" onclick="verFicha(event, this)">
                     Ficha técnica
                 </a>
 
-                <div class="product" data-id="extractor-16">
-        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
-
-        <div class="product-info">
-            <h3>EXTRACTOR AXIAL DE 16"</h3>
-            <p>EXTRACTOR AXIAL DE 16" 1/2 HP MOTOR DIRECTO</p>
-
-            <div class="price">$7,470.40</div>
-
-            <div class="actions">
-
-                <!-- FICHA TÉCNICA (PDF) -->
-                <!-- Si NO hay PDF, deja href vacío -->
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">
-                    Ficha técnica
-                </a>
-
-                <!-- WHATSAPP (MENSAJE AUTOMÁTICO SEGÚN TÍTULO) -->
                 <button class="btn-whatsapp" onclick="contactarWhats(this)">
                     Contactar sucursal (WhatsApp)
                 </button>
@@ -205,12 +178,10 @@ footer {
                 <button class="btn-fav" onclick="toggleFavorite(this)">
                     ⭐ Favorito
                 </button>
+
             </div>
         </div>
     </div>
-
-    <!-- 🔁 COPIA TODO ESTE BLOQUE .product PARA AGREGAR OTRO EQUIPO -->
-    <!-- SOLO CAMBIA: IMAGEN, H3, DESCRIPCIÓN, PRECIO Y data-id -->
 
 </div>
 
@@ -218,13 +189,13 @@ footer {
 © 2024 Ventiver Servicios
 </footer>
 
-<!-- ALERTA -->
 <div class="alert" id="alerta">
-    <button onclick="cerrarAlerta()">✖</button>
-    No hay ficha técnica disponible para este equipo.
+<button onclick="cerrarAlerta()">✖</button>
+No hay ficha técnica disponible para este equipo.
 </div>
 
 <script>
+
 /* FAVORITOS */
 function toggleFavorite(btn) {
     const product = btn.closest('.product');
@@ -252,7 +223,7 @@ document.querySelectorAll('.product').forEach(product => {
     }
 });
 
-/* WHATSAPP AUTOMÁTICO SEGÚN EQUIPO */
+/* WHATSAPP */
 function contactarWhats(btn) {
     const product = btn.closest('.product');
     const titulo = product.querySelector('h3').innerText;
@@ -271,13 +242,15 @@ function verFicha(e, link) {
     }
 }
 
-/* CERRAR ALERTA */
 function cerrarAlerta() {
     document.getElementById('alerta').style.display = 'none';
 }
+
 </script>
 
 </body>
 </html>
+
+
 
 
