@@ -6,7 +6,6 @@
 <title>Productos - Sucursal</title>
 
 <style>
-
 body{
     margin:0;
     font-family:Arial, sans-serif;
@@ -39,7 +38,6 @@ header{
     max-width:1200px;
     margin:auto;
     padding:30px 20px;
-
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
@@ -151,7 +149,6 @@ footer{
     padding:15px;
     margin-top:40px;
 }
-
 </style>
 </head>
 
@@ -168,7 +165,7 @@ footer{
 
     <!-- PRODUCTO -->
     <div class="product" data-id="extractor-16">
-        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png">
+        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
 
         <div class="product-info">
             <h3>EXTRACTOR AXIAL DE 16"</h3>
@@ -189,10 +186,11 @@ footer{
                 </button>
             </div>
         </div>
-
+    </div> <!-- Cierre product -->
 
     <!-- DUPLICA ESTE BLOQUE PARA MÁS PRODUCTOS -->
 
+</div> <!-- Cierre container -->
 
 <footer>
 © 2024 Ventiver Servicios
@@ -204,13 +202,10 @@ No hay ficha técnica disponible.
 </div>
 
 <script>
-
 function toggleFavorite(btn){
     const product = btn.closest('.product');
     const id = product.dataset.id;
-
     let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-
     if(favs.includes(id)){
         favs = favs.filter(f => f !== id);
         btn.textContent="⭐ Favorito";
@@ -218,7 +213,6 @@ function toggleFavorite(btn){
         favs.push(id);
         btn.textContent="✅ En favoritos";
     }
-
     localStorage.setItem('favoritos',JSON.stringify(favs));
 }
 
@@ -233,10 +227,8 @@ document.querySelectorAll('.product').forEach(product=>{
 function contactarWhats(btn){
     const product = btn.closest('.product');
     const titulo = product.querySelector('h3').innerText;
-
     const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Villahermosa.`;
     const url = `https://wa.me/529931207030?text=${encodeURIComponent(mensaje)}`;
-
     window.open(url,'_blank');
 }
 
@@ -250,7 +242,6 @@ function verFicha(e,link){
 function cerrarAlerta(){
     document.getElementById('alerta').style.display='none';
 }
-
 </script>
 
 </body>
