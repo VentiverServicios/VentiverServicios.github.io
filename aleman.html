@@ -6,10 +6,24 @@
 <title>Productos - Sucursal</title>
 
 <style>
+
+/* RESET */
+*{
+    box-sizing:border-box;
+}
+
+html{
+    height:100%;
+}
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
     background:#f4f6f9;
+
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
 /* HEADER */
@@ -33,7 +47,7 @@ header{
     cursor:pointer;
 }
 
-/* CONTENEDOR GRID */
+/* CONTENEDOR PRODUCTOS */
 .container{
     max-width:1200px;
     margin:auto;
@@ -41,9 +55,12 @@ header{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
+
+    flex:1;
+    width:100%;
 }
 
-/* TARJETA */
+/* TARJETAS */
 .product{
     background:white;
     border-radius:12px;
@@ -52,22 +69,19 @@ header{
     display:flex;
     flex-direction:column;
     transition:0.3s;
-    height:100%; /* fuerza que todas las tarjetas tengan igual altura */
 }
 
 .product:hover{
     transform:translateY(-5px);
 }
 
-/* IMAGEN */
 .product img{
     width:100%;
-    height:220px; /* altura fija */
-    object-fit:contain; /* no distorsiona la imagen */
+    height:220px;
+    object-fit:contain;
     margin-bottom:15px;
 }
 
-/* INFO */
 .product-info h3{
     font-size:18px;
     margin:0 0 8px 0;
@@ -76,7 +90,7 @@ header{
 .product-info p{
     font-size:14px;
     color:#666;
-    min-height:40px; /* altura mínima para que se alineen */
+    min-height:40px;
 }
 
 .price{
@@ -86,7 +100,6 @@ header{
     margin:12px 0;
 }
 
-/* BOTONES */
 .actions{
     margin-top:auto;
     display:flex;
@@ -106,19 +119,9 @@ header{
     font-weight:bold;
 }
 
-.btn-tech{
-    background:#444;
-    color:white;
-}
-
-.btn-whatsapp{
-    background:#25D366;
-    color:white;
-}
-
-.btn-fav{
-    background:#ffcc00;
-}
+.btn-tech{ background:#444; color:white; }
+.btn-whatsapp{ background:#25D366; color:white; }
+.btn-fav{ background:#ffcc00; }
 
 /* ALERTA */
 .alert{
@@ -142,18 +145,24 @@ header{
     cursor:pointer;
 }
 
-/* FOOTER */
+/* FOOTER CORREGIDO */
 footer{
     background:#003366;
     color:white;
     text-align:center;
     padding:15px;
-    margin-top:40px;
+    margin-top:auto;
 }
+
 </style>
 </head>
 
 <body>
+
+
+
+
+
 
 <header>
 <button class="back-button" onclick="window.location.href='sucursales.html'">
@@ -164,140 +173,141 @@ footer{
 
 <div class="container">
 
-    <!-- PRODUCTO 1 -->
-    <div class="product" data-id="extractor-16">
-        <img src="WhatsApp Image 2026-02-11 at 2.47.14 PM" WhatsApp Image 2026-02-11 at 2.47.14 PM">
-        <div class="product-info">
-            <h3>EXTRACTOR AXIAL DE 16"</h3>
-            <p>Extractor axial 16" 18" Y 20" 0.5 HP MOTOR DIRECTO </p>
-            <div class="price">$9,198.80</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 1 -->
+<div class="product" data-id="p1">
+<img src="WhatsApp Image 2026-02-11 at 2.47.14 PM.jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR AXIAL DE 16"</h3>
+<p>Extractor axial 16" 18" Y 20" 0.5 HP MOTOR DIRECTO</p>
+<div class="price">$9,198.80</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-    <!-- PRODUCTO 2 -->
-<div class="product" data-id="extractor-16">
-        <img src="WhatsApp Image 2026-02-11 at 2.47.35 PM.jpe"
-        <div class="product-info">
-            <h3>EXTRACTOR CENTRIGUFO DE 12"</h3>
-            <p>Extractor centrigufugo de 6",8" 0.5 PH 10" Y 12" 1HP A 2 HP  </p>
-            <div class="price">$14,439.02</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 2 -->
+<div class="product" data-id="p2">
+<img src="WhatsApp Image 2026-02-11 at 2.47.35 PM.jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR CENTRIGUFO DE 12"</h3>
+<p>Extractor centrigufugo de 6",8" 0.5 PH 10" Y 12" 1HP A 2 HP</p>
+<div class="price">$14,439.02</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-    <!-- DUPLICA MÁS PRODUCTOS AQUÍ -->
-<div class="product" data-id="extractor-16">
-        <img src="Centrífuga.png.jpeg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR TURBO AXIAL DE 14" 0.5 HP MOTOR DIRECTO </h3>
-            <p>EXTRACTOR TURBO AXIAL DE 14", 16",18",20"Y 24" 0.5 HP  </p>
-            <div class="price">$22,000</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 3 -->
+<div class="product" data-id="p3">
+<img src="Centrífuga.png.jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR TURBO AXIAL DE 14" 0.5 HP MOTOR DIRECTO</h3>
+<p>EXTRACTOR TURBO AXIAL DE 14",16",18",20"Y 24" 0.5 HP</p>
+<div class="price">$22,000</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-<div class="product" data-id="extractor-16">
-        <img src="Centrífuga.png.jpeg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR TURBO AXIAL DE 30" 1 HP TRACCION BANDA POLEA </h3>
-            <p>EXTRACTOR AXIAL DE 30" 1 HP  Y 40" 1.5 HP </p>
-            <div class="price">$42,000</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 4 -->
+<div class="product" data-id="p4">
+<img src="Centrífuga.png.jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR TURBO AXIAL DE 30" 1 HP TRACCION BANDA POLEA</h3>
+<p>EXTRACTOR AXIAL DE 30" 1 HP Y 40" 1.5 HP</p>
+<div class="price">$42,000</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-<div class="product" data-id="extractor-16">
-        <img src="https://github.com/VentiverServicios/VentiverServicios.github.io/blob/main/WhatsApp%20Image%202026-02-11%20at%202.47.14%20PM%20(1).jpeg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR AXIAL TRACCION BANDA POLEA 24" 1.5 HP</h3>
-            <p>EXTRACTOR AXIAL TRACCION BANDA POLEA 24",30",36",40" Y 48" 1 PH Y 2 HP  </p>
-            <div class="price">$26,1000</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 5 -->
+<div class="product" data-id="p5">
+<img src="https://raw.githubusercontent.com/VentiverServicios/VentiverServicios.github.io/main/WhatsApp%20Image%202026-02-11%20at%202.47.14%20PM%20(1).jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR AXIAL TRACCION BANDA POLEA 24" 1.5 HP</h3>
+<p>EXTRACTOR AXIAL TRACCION BANDA POLEA 24",30",36",40",48"</p>
+<div class="price">$26,100</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
+<!-- PRODUCTO 6 -->
+<div class="product" data-id="p6">
+<img src="88854222.jpg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR EOLICO DE ALUMINIO</h3>
+<p>Extractor EOLICO 14",16",18",20",24",30",36",40"</p>
+<div class="price">$7,505.20</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-<div class="product" data-id="extractor-16">
-        <img src="88854222.jpg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR EOLICO DE ALUMINIO </h3>
-            <p>Extractor EOLICO 14",16",18",20",24",30",36"40" EN ALUMINIO  </p>
-            <div class="price">$7,505.20</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 7 -->
+<div class="product" data-id="p7">
+<img src="https://raw.githubusercontent.com/VentiverServicios/VentiverServicios.github.io/main/WhatsApp%20Image%202026-02-11%20at%203.19.03%20PM.jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR EOLICO PINTRO</h3>
+<p>EXTRACTORES EOLICO 14",16",18",20",24",30",36",40" PINTRO</p>
+<div class="price">$7,393.26</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-div class="product" data-id="extractor-16">
-        <img src="https://github.com/VentiverServicios/VentiverServicios.github.io/blob/main/WhatsApp%20Image%202026-02-11%20at%203.19.03%20PM.jpeg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR EOLICO PINTRO  </h3>
-            <p>EXTRACTORES EOLICO 14",16",18",20",24",30",36"40" PINTRO  </p>
-            <div class="price">$7,393.26</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 8 -->
+<div class="product" data-id="p8">
+<img src="6379784510.jpg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR EOLICO GALVANIZADO</h3>
+<p>Extractor EOLICO DE 14",16",18",20",24",30",36",40"</p>
+<div class="price">$7,393.26</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-div class="product" data-id="extractor-16">
-        <img src="6379784510.jpg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR EOLICO GALVANIZADO </h3>
-            <p>Extractor EOLICO DE 14",16",18",20",24",30",36",40" </p>
-            <div class="price">$7,393.26</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 9 -->
+<div class="product" data-id="p9">
+<img src="https://raw.githubusercontent.com/VentiverServicios/VentiverServicios.github.io/main/WhatsApp%20Image%202026-02-11%20at%203.20.27%20PM.jpeg" alt="">
+<div class="product-info">
+<h3>EXTRACTOR TIPO HONGO MARCA S&P CRVLT-12</h3>
+<p>CRVLT-12,14,16,18,20,24,26</p>
+<div class="price">$94,714</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-    div class="product" data-id="extractor-16">
-        <img src="https://github.com/VentiverServicios/VentiverServicios.github.io/blob/main/WhatsApp%20Image%202026-02-11%20at%203.20.27%20PM.jpeg" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR TIPO HONGO MARCA S&P CRVLT-12</h3>
-            <p>Extractor TIPO HOMGO CRVLT-12,CRVLT-14,CRVLT-16,CRVLT-18,CRVLT-20,CRVLT-24,CRVLT-26  </p>
-            <div class="price">$94,714</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
-
-
-
-    
-</div> <!-- FIN CONTAINER -->
 
 <footer>
 © 2024 Ventiver Servicios
@@ -310,54 +320,49 @@ No hay ficha técnica disponible.
 
 <script>
 function toggleFavorite(btn){
-    const product = btn.closest('.product');
-    const id = product.dataset.id;
-    let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-    if(favs.includes(id)){
-        favs = favs.filter(f => f !== id);
-        btn.textContent="⭐ Favorito";
-    }else{
-        favs.push(id);
-        btn.textContent="✅ En favoritos";
-    }
-    localStorage.setItem('favoritos',JSON.stringify(favs));
+const product = btn.closest('.product');
+const id = product.dataset.id;
+let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+if(favs.includes(id)){
+favs = favs.filter(f => f !== id);
+btn.textContent="⭐ Favorito";
+}else{
+favs.push(id);
+btn.textContent="✅ En favoritos";
+}
+localStorage.setItem('favoritos',JSON.stringify(favs));
 }
 
 document.querySelectorAll('.product').forEach(product=>{
-    const id = product.dataset.id;
-    let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-    if(favs.includes(id)){
-        product.querySelector('.btn-fav').textContent="✅ En favoritos";
-    }
+const id = product.dataset.id;
+let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+if(favs.includes(id)){
+product.querySelector('.btn-fav').textContent="✅ En favoritos";
+}
 });
 
 function contactarWhats(btn){
-    const product = btn.closest('.product');
-    const titulo = product.querySelector('h3').innerText;
-    const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Villahermosa.`;
-    const url = `https://wa.me/529931207030?text=${encodeURIComponent(mensaje)}`;
-    window.open(url,'_blank');
+const product = btn.closest('.product');
+const titulo = product.querySelector('h3').innerText;
+const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Miguel Aleman.`;
+const url = `https://wa.me/529931207030?text=${encodeURIComponent(mensaje)}`;
+window.open(url,'_blank');
 }
 
 function verFicha(e,link){
-    if(!link.getAttribute('href')){
-        e.preventDefault();
-        document.getElementById('alerta').style.display='block';
-    }
+if(!link.getAttribute('href') || link.getAttribute('href') === "#"){
+e.preventDefault();
+document.getElementById('alerta').style.display='block';
+}
 }
 
 function cerrarAlerta(){
-    document.getElementById('alerta').style.display='none';
+document.getElementById('alerta').style.display='none';
 }
 </script>
 
 </body>
 </html>
-
-
-
-
-
 
 
 
