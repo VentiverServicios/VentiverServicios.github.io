@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Productos - Sucursal </title>
+
+<title>Productos - Sucursal Miguel Alemán</title>
 
 <style>
 body {
@@ -41,7 +42,7 @@ header {
     margin: auto;
 }
 
-/* TARJETA DE EQUIPO */
+/* TARJETA */
 .product {
     background: #fff;
     border-radius: 8px;
@@ -53,7 +54,6 @@ header {
     margin-bottom: 20px;
 }
 
-/* IMAGEN */
 .product img {
     width: 300px;
     max-width: 100%;
@@ -61,14 +61,9 @@ header {
     object-fit: cover;
 }
 
-/* INFO */
 .product-info {
     flex: 1;
     min-width: 260px;
-}
-
-.product-info h3 {
-    margin-top: 0;
 }
 
 .price {
@@ -78,7 +73,6 @@ header {
     margin: 10px 0;
 }
 
-/* BOTONES */
 .actions {
     display: flex;
     flex-direction: column;
@@ -97,26 +91,11 @@ header {
     font-size: 14px;
 }
 
-.btn-tech {
-    background: #555;
-    color: #fff;
-}
+.btn-tech { background: #555; color: #fff; }
+.btn-whatsapp { background: #25D366; color: #fff; }
+.btn-fav { background: #ffcc00; }
 
-.btn-contact {
-    background: #003366;
-    color: #fff;
-}
-
-.btn-whatsapp {
-    background: #25D366;
-    color: #fff;
-}
-
-.btn-fav {
-    background: #ffcc00;
-}
-
-/* ALERTA FLOTANTE */
+/* ALERTA */
 .alert {
     position: fixed;
     top: 20px;
@@ -139,7 +118,6 @@ header {
     cursor: pointer;
 }
 
-/* FOOTER */
 footer {
     background: #003366;
     color: #fff;
@@ -156,58 +134,54 @@ footer {
 <button class="back-button" onclick="window.location.href='sucursales.html'">
     ← Regresar
 </button>
-
-    <h1>Sucursal miguel aleman</h1>
+<h1>Sucursal Miguel Alemán</h1>
 </header>
 
 <div class="container">
 
-    <!-- ================== EQUIPO / EXTRACTOR ================== -->
-    <div class="product" data-id="extractor-16">
-        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
+<div class="product" data-id="extractor-16">
+    <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
 
-        <div class="product-info">
-            <h3>EXTRACTOR AXIAL DE 16"</h3>
-            <p>EXTRACTOR AXIAL DE 16" 1/2 HP MOTOR DIRECTO</p>
+    <div class="product-info">
+        <h3>EXTRACTOR AXIAL DE 16"</h3>
+        <p>Extractor axial de 16" 1/2 HP motor directo.</p>
 
-            <div class="price">$7,470.40</div>
+        <div class="price">$7,470.40</div>
 
-            <div class="actions">
+        <div class="actions">
 
-                <!-- FICHA TÉCNICA (PDF) -->
-                <!-- Si NO hay PDF, deja href vacío -->
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">
-                    Ficha técnica
-                </a>
+            <a href="" class="btn-tech" onclick="verFicha(event, this)">
+                Ficha técnica
+            </a>
 
-                <!-- WHATSAPP (MENSAJE AUTOMÁTICO SEGÚN TÍTULO) -->
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">
-                    Contactar sucursal (WhatsApp)
-                </button>
+            <button class="btn-whatsapp" onclick="contactarWhats(this)">
+                Contactar sucursal (WhatsApp)
+            </button>
 
-                <button class="btn-fav" onclick="toggleFavorite(this)">
-                    ⭐ Favorito
-                </button>
-            </div>
+            <button class="btn-fav" onclick="toggleFavorite(this)">
+                ⭐ Favorito
+            </button>
+
         </div>
     </div>
-
-    <!-- 🔁 COPIA TODO ESTE BLOQUE .product PARA AGREGAR OTRO EQUIPO -->
-    <!-- SOLO CAMBIA: IMAGEN, H3, DESCRIPCIÓN, PRECIO Y data-id -->
+</div>
 
 </div>
 
 <footer>
-© 2024 Ventiver Servicios
+© <span id="year"></span> Ventiver Servicios
 </footer>
 
-<!-- ALERTA -->
 <div class="alert" id="alerta">
     <button onclick="cerrarAlerta()">✖</button>
     No hay ficha técnica disponible para este equipo.
 </div>
 
 <script>
+
+/* AÑO AUTOMÁTICO */
+document.getElementById("year").textContent = new Date().getFullYear();
+
 /* FAVORITOS */
 function toggleFavorite(btn) {
     const product = btn.closest('.product');
@@ -235,18 +209,19 @@ document.querySelectorAll('.product').forEach(product => {
     }
 });
 
-/* WHATSAPP AUTOMÁTICO SEGÚN EQUIPO */
+/* WHATSAPP DINÁMICO SEGÚN SUCURSAL */
 function contactarWhats(btn) {
     const product = btn.closest('.product');
     const titulo = product.querySelector('h3').innerText;
+    const sucursal = document.querySelector('header h1').innerText;
 
-    const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Villahermosa. ¿Me pueden dar información?`;
+    const mensaje = `Hola, me interesa el ${titulo} de ${sucursal}. ¿Me pueden dar información?`;
     const url = `https://wa.me/529931207030?text=${encodeURIComponent(mensaje)}`;
 
     window.open(url, '_blank');
 }
 
-/* FICHA TÉCNICA */
+/* FICHA */
 function verFicha(e, link) {
     if (!link.getAttribute('href')) {
         e.preventDefault();
@@ -254,10 +229,10 @@ function verFicha(e, link) {
     }
 }
 
-/* CERRAR ALERTA */
 function cerrarAlerta() {
     document.getElementById('alerta').style.display = 'none';
 }
+
 </script>
 
 </body>
