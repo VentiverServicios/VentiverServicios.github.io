@@ -6,10 +6,24 @@
 <title>Productos - Sucursal</title>
 
 <style>
+
+/* RESET */
+*{
+    box-sizing:border-box;
+}
+
+html{
+    height:100%;
+}
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
     background:#f4f6f9;
+
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
 /* HEADER */
@@ -33,7 +47,7 @@ header{
     cursor:pointer;
 }
 
-/* CONTENEDOR GRID */
+/* CONTENEDOR PRODUCTOS */
 .container{
     max-width:1200px;
     margin:auto;
@@ -41,9 +55,12 @@ header{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
+
+    flex:1;
+    width:100%;
 }
 
-/* TARJETA */
+/* TARJETAS */
 .product{
     background:white;
     border-radius:12px;
@@ -52,22 +69,19 @@ header{
     display:flex;
     flex-direction:column;
     transition:0.3s;
-    height:100%; /* fuerza que todas las tarjetas tengan igual altura */
 }
 
 .product:hover{
     transform:translateY(-5px);
 }
 
-/* IMAGEN */
 .product img{
     width:100%;
-    height:220px; /* altura fija */
-    object-fit:contain; /* no distorsiona la imagen */
+    height:220px;
+    object-fit:contain;
     margin-bottom:15px;
 }
 
-/* INFO */
 .product-info h3{
     font-size:18px;
     margin:0 0 8px 0;
@@ -76,7 +90,7 @@ header{
 .product-info p{
     font-size:14px;
     color:#666;
-    min-height:40px; /* altura mínima para que se alineen */
+    min-height:40px;
 }
 
 .price{
@@ -86,7 +100,6 @@ header{
     margin:12px 0;
 }
 
-/* BOTONES */
 .actions{
     margin-top:auto;
     display:flex;
@@ -106,19 +119,9 @@ header{
     font-weight:bold;
 }
 
-.btn-tech{
-    background:#444;
-    color:white;
-}
-
-.btn-whatsapp{
-    background:#25D366;
-    color:white;
-}
-
-.btn-fav{
-    background:#ffcc00;
-}
+.btn-tech{ background:#444; color:white; }
+.btn-whatsapp{ background:#25D366; color:white; }
+.btn-fav{ background:#ffcc00; }
 
 /* ALERTA */
 .alert{
@@ -142,18 +145,24 @@ header{
     cursor:pointer;
 }
 
-/* FOOTER */
+/* FOOTER CORREGIDO */
 footer{
     background:#003366;
     color:white;
     text-align:center;
     padding:15px;
-    margin-top:40px;
+    margin-top:auto;
 }
+
 </style>
 </head>
 
 <body>
+
+
+
+
+
 
 <header>
 <button class="back-button" onclick="window.location.href='sucursales.html'">
@@ -164,40 +173,24 @@ footer{
 
 <div class="container">
 
-    <!-- PRODUCTO 1 -->
-    <div class="product" data-id="extractor-16">
-        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 16">
-        <div class="product-info">
-            <h3>EXTRACTOR AXIAL DE 16"</h3>
-            <p>Extractor axial de 16" 1/2 HP motor directo</p>
-            <div class="price">$7,470.40</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
+<!-- PRODUCTO 1 -->
+<div class="product" data-id="p1">
+<img src="" alt="">
+<div class="product-info">
+<h3>EXTRACTOR</h3>
+<p>DESCRIPCION</p>
+<div class="price">PRECIO</div>
+<div class="actions">
+<a href="#" class="btn-tech" onclick="verFicha(event,this)">Ficha técnica</a>
+<button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
+<button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
+</div>
+</div>
+</div>
 
-    <!-- PRODUCTO 2 -->
-    <div class="product" data-id="extractor-18">
-        <img src="WhatsApp_Image_2024-09-21_at_12.13.33_PM-removebg-preview.png" alt="Extractor Axial 18">
-        <div class="product-info">
-            <h3>EXTRACTOR AXIAL DE 18"</h3>
-            <p>Extractor axial de 18" 1 HP motor directo</p>
-            <div class="price">$8,900.00</div>
-            <div class="actions">
-                <a href="" class="btn-tech" onclick="verFicha(event, this)">Ficha técnica</a>
-                <button class="btn-whatsapp" onclick="contactarWhats(this)">Contactar sucursal</button>
-                <button class="btn-fav" onclick="toggleFavorite(this)">⭐ Favorito</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- DUPLICA MÁS PRODUCTOS AQUÍ -->
 
-</div> <!-- FIN CONTAINER -->
-
+    
 <footer>
 © 2024 Ventiver Servicios
 </footer>
@@ -209,47 +202,58 @@ No hay ficha técnica disponible.
 
 <script>
 function toggleFavorite(btn){
-    const product = btn.closest('.product');
-    const id = product.dataset.id;
-    let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-    if(favs.includes(id)){
-        favs = favs.filter(f => f !== id);
-        btn.textContent="⭐ Favorito";
-    }else{
-        favs.push(id);
-        btn.textContent="✅ En favoritos";
-    }
-    localStorage.setItem('favoritos',JSON.stringify(favs));
+const product = btn.closest('.product');
+const id = product.dataset.id;
+let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+if(favs.includes(id)){
+favs = favs.filter(f => f !== id);
+btn.textContent="⭐ Favorito";
+}else{
+favs.push(id);
+btn.textContent="✅ En favoritos";
+}
+localStorage.setItem('favoritos',JSON.stringify(favs));
 }
 
 document.querySelectorAll('.product').forEach(product=>{
-    const id = product.dataset.id;
-    let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-    if(favs.includes(id)){
-        product.querySelector('.btn-fav').textContent="✅ En favoritos";
-    }
+const id = product.dataset.id;
+let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+if(favs.includes(id)){
+product.querySelector('.btn-fav').textContent="✅ En favoritos";
+}
 });
 
 function contactarWhats(btn){
-    const product = btn.closest('.product');
-    const titulo = product.querySelector('h3').innerText;
-    const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Villahermosa.`;
-    const url = `https://wa.me/529931207030?text=${encodeURIComponent(mensaje)}`;
-    window.open(url,'_blank');
+const product = btn.closest('.product');
+const titulo = product.querySelector('h3').innerText;
+const mensaje = `Hola, me interesa el ${titulo} de la Sucursal Miguel Aleman.`;
+const url = `https://wa.me/522294627449?text=${encodeURIComponent(mensaje)}`;
+window.open(url,'_blank');
 }
 
 function verFicha(e,link){
-    if(!link.getAttribute('href')){
-        e.preventDefault();
-        document.getElementById('alerta').style.display='block';
-    }
+if(!link.getAttribute('href') || link.getAttribute('href') === "#"){
+e.preventDefault();
+document.getElementById('alerta').style.display='block';
+}
 }
 
 function cerrarAlerta(){
-    document.getElementById('alerta').style.display='none';
+document.getElementById('alerta').style.display='none';
 }
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
