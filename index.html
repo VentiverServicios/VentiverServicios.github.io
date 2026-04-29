@@ -27,6 +27,17 @@ body.fondo{
     overflow-x:hidden;
 }
 
+/* ESTILO PARA EL NOMBRE DE USUARIO */
+#user-display {
+    color: #00d4ff;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 10px;
+    display: none;
+    align-self: center;
+    text-transform: uppercase;
+}
+
 /* LOADING */
 #loading-screen{
     position:fixed;
@@ -340,9 +351,10 @@ footer{
     </div>
 
     <div class="top-buttons">
+        <span id="user-display">USUARIO: <span id="user-name-text"></span></span>
         <a href="soporte.html">SOPORTE TÉCNICO</a>
         <a href="sucursales.html">SUCURSALES</a>
-        <a href="login.html" style="background:#00d4ff;color:#003366;">
+        <a href="login.html" id="auth-link" style="background:#00d4ff;color:#003366;">
             LOGIN_ADMIN
         </a>
     </div>
@@ -377,7 +389,6 @@ footer{
     </div>
 </section>
 
-<!-- NUEVA SECCIÓN AGREGADA -->
 <section class="section-pro">
     <div class="text-side" data-aos="fade-right">
         <h3>Servicios<br>Premium.</h3>
@@ -426,8 +437,8 @@ footer{
         </div>
 
         <div class="eng-card" data-aos="fade-up" data-aos-delay="600">
-            <h4>server web</h4>
-            <p></p>
+            <h4>COBERTURA</h4>
+            <p>Servicio en toda la República Mexicana.</p>
         </div>
     </div>
 </section>
@@ -534,11 +545,6 @@ footer{
     </div>
 </section>
 
-    <div class="img-side" data-aos="zoom-in">
-        <img src="nuevaa.jpeg" alt="">
-    </div>
-</section>
-
 <footer>
     <div class="footer-grid">
         <div class="footer-col">
@@ -571,7 +577,7 @@ footer{
 
     <div class="footer-fun-fact">
         © 2026 Ventiver S.A. de C.V. | DevvWeb Corporation 2024 service
-    </div
+    </div>
 </footer>
 
 </div>
@@ -630,9 +636,34 @@ const interval = setInterval(() => {
                 duration: 1000,
                 once: false
             });
+            // LLAMAR A FUNCIÓN DE SESIÓN AL CARGAR
+            checkSession();
         }, 500);
     }
 }, 30);
+
+// --- FUNCIÓN DE SESIÓN PARA RECONOCER USER ---
+function checkSession() {
+    const activeUser = localStorage.getItem('currentUser');
+    const userDisplay = document.getElementById('user-display');
+    const userNameText = document.getElementById('user-name-text');
+    const authLink = document.getElementById('auth-link');
+
+    if (activeUser) {
+        userDisplay.style.display = 'inline-block';
+        userNameText.textContent = activeUser;
+        
+        // Cambiar botón a Logout
+        authLink.textContent = 'LOGOUT';
+        authLink.style.background = '#ff4b2b';
+        authLink.style.color = 'white';
+        authLink.href = '#';
+        authLink.onclick = function() {
+            localStorage.removeItem('currentUser');
+            location.reload();
+        };
+    }
+}
 
 function irSucursales(){
     loadingScreen.style.transform = "translateY(0)";
