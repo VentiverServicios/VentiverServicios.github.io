@@ -452,9 +452,29 @@
               <th>Estado actual</th>
               <td id="statusCell" class="state"></td>
             </tr>
+            <tr id="productRow" style="display:none">
+              <th>Producto / equipo</th>
+              <td id="productCell"></td>
+            </tr>
+            <tr id="modelRow" style="display:none">
+              <th>Modelo / referencia</th>
+              <td id="modelCell"></td>
+            </tr>
+            <tr id="clientRow" style="display:none">
+              <th>Cliente / solicitante</th>
+              <td id="clientCell"></td>
+            </tr>
+            <tr id="branchRow" style="display:none">
+              <th>Sucursal</th>
+              <td id="branchCell"></td>
+            </tr>
             <tr>
               <th>Tiempo estimado</th>
               <td id="timeCell"></td>
+            </tr>
+            <tr id="reasonRow" style="display:none">
+              <th>Motivo</th>
+              <td id="reasonCell"></td>
             </tr>
           </table>
 
@@ -514,40 +534,254 @@
       ============================================================
       AGREGA MÁS CÓDIGOS Y PRODUCTOS AQUÍ PARA FUTUROS SEGUIMIENTOS
       ============================================================
-      Copia un registro y cambia sus datos.
 
-      EJEMPLO FALSO:
+      IMPORTANTE:
+      - NO borres el código que ya existe.
+      - El otro sistema de cancelaciones genera automáticamente un
+        bloque listo para copiar y pegar.
+      - Copia ese bloque y pégalo DENTRO del objeto "reembolsos",
+        debajo del registro existente.
+      - Recuerda poner una coma entre un registro y el siguiente.
+      - El buscador reconocerá automáticamente el nuevo código.
+      - Si el bloque incluye producto, modelo, cliente, sucursal o
+        motivo, esos datos aparecerán automáticamente en la consulta.
+
+      PARA LOS NUEVOS BLOQUES GENERADOS:
+      Si incluyen "seguimientoAutomatico: true", NO necesitas cambiar
+      estado, etapaActual ni progreso manualmente. La barra y el estado
+      se calcularán automáticamente según la fecha de cada registro.
+
+      Estados reconocidos:
+      "CANCELACIÓN REGISTRADA" -> 25%
+      "SOLICITUD RECIBIDA"     -> 25%
+      "EN REVISIÓN"            -> 50%
+      "EN PROCESO"             -> 50%
+      "REEMBOLSO EMITIDO"      -> 75%
+      "EMITIDO"                -> 75%
+      "COMPLETADO"             -> 100%
+      "REEMBOLSO REFLEJADO"    -> 100%
+
+      Si deseas controlar manualmente el avance, también puedes dejar:
+      etapaActual: 1, 2, 3 o 4
+      progreso: 25, 50, 75 o 100
+
+      EJEMPLO FALSO (NO es un código real):
       "ABC-00-0000": {
         codigo: "ABC-00-0000",
         producto: "Nombre del producto",
+        modelo: "Modelo de ejemplo",
+        cliente: "Cliente de ejemplo",
+        sucursal: "Sucursal de ejemplo",
         monto: 0.00,
         fecha: "Fecha de solicitud",
         estado: "EN PROCESO",
-        tiempo: "Hasta 30 días hábiles una vez emitido",
-        etapaActual: 1,
-        progreso: 25
+        motivo: "Motivo de ejemplo",
+        tiempo: "Hasta 30 días hábiles una vez emitido"
       }
+
+      ============================================================
+      PEGA AQUÍ ABAJO LOS NUEVOS BLOQUES GENERADOS POR EL OTRO SISTEMA
+      ============================================================
     */
 
     const reembolsos = {
+
+      // REGISTRO YA EXISTENTE - NO BORRAR
+      // Este reembolso usa seguimiento automático según la fecha.
       "TUB-18-2026": {
         codigo: "TUB-18-2026",
         producto: "Reembolso Ventiver",
         monto: 15100.00,
         fecha: "19 de junio de 2026",
-        estado: "EN PROCESO",
-        tiempo: "Hasta 30 días hábiles una vez emitido",
-        etapaActual: 2,
-        progreso: 50
+        fechaISO: "2026-06-19",
+        motivo: "Seguimiento de reembolso",
+        seguimientoAutomatico: true,
+        seguimientoEtapas: [
+          { desde: 1, hasta: 7, estado: "EN PROCESO" },
+          { desde: 8, hasta: 10, estado: "CONFIRMADO" },
+          { desde: 11, hasta: 15, estado: "EN ESPERA DE DESENLACE" },
+          { desde: 16, hasta: 30, estado: "EN ESPERA DE EMISIÓN BANCARIA" }
+        ]
       }
+
+      /*
+        ==========================================================
+        PEGA LOS NUEVOS REGISTROS GENERADOS POR EL OTRO SISTEMA AQUÍ
+        ==========================================================
+        EJEMPLO:
+        ,
+        "CODIGO-GENERADO": {
+          ...datos...
+        }
+
+        El primer registro TUB-18-2026 de arriba debe conservarse.
+      */
     };
 
     const etapas = [
-      "Solicitud recibida",
-      "Revisión",
-      "Emisión del reembolso",
-      "Reembolso reflejado"
+      "En proceso",
+      "Confirmado",
+      "En espera de desenlace",
+      "En espera de emisión bancaria"
     ];
+
+    /*
+      ============================================================
+      SEGUIMIENTO AUTOMÁTICO POR DÍAS
+      ============================================================
+
+      Para los registros que tengan:
+      seguimientoAutomatico: true
+
+      El sistema calcula los días transcurridos desde "fechaISO" o "fecha"
+      y actualiza automáticamente:
+      - Estado
+      - Etapa
+      - Porcentaje de la barra
+
+      Rangos:
+      Día 1 al 7   -> EN PROCESO
+      Día 8 al 10  -> CONFIRMADO
+      Día 11 al 15 -> EN ESPERA DE DESENLACE
+      Día 16 al 30 -> EN ESPERA DE EMISIÓN BANCARIA
+
+      La barra avanza un poco CADA DÍA hasta llegar al 100% en el día 30.
+
+      Después del día 30 se mantiene en 100% y el estado pasa a:
+      "PLAZO ESTIMADO CUMPLIDO - PENDIENTE DE ACTUALIZACIÓN"
+
+      Los registros antiguos que NO tengan seguimientoAutomatico seguirán
+      usando etapaActual/progreso o el estado manual como antes.
+    */
+
+    const estadosProgreso = {
+      "CANCELACIÓN REGISTRADA": { etapa: 1, progreso: 25 },
+      "SOLICITUD RECIBIDA": { etapa: 1, progreso: 25 },
+      "EN REVISIÓN": { etapa: 2, progreso: 50 },
+      "EN PROCESO": { etapa: 2, progreso: 50 },
+      "REEMBOLSO EMITIDO": { etapa: 3, progreso: 75 },
+      "EMITIDO": { etapa: 3, progreso: 75 },
+      "COMPLETADO": { etapa: 4, progreso: 100 },
+      "REEMBOLSO REFLEJADO": { etapa: 4, progreso: 100 }
+    };
+
+    function parsearFechaSeguimiento(data) {
+      if (data.fechaISO && /^\d{4}-\d{2}-\d{2}$/.test(data.fechaISO)) {
+        const [y, m, d] = data.fechaISO.split("-").map(Number);
+        return new Date(y, m - 1, d);
+      }
+
+      if (data.fecha && /^\d{4}-\d{2}-\d{2}$/.test(data.fecha)) {
+        const [y, m, d] = data.fecha.split("-").map(Number);
+        return new Date(y, m - 1, d);
+      }
+
+      return null;
+    }
+
+    function diasTranscurridosDesde(fechaInicio) {
+      if (!fechaInicio) return 1;
+
+      const inicio = new Date(
+        fechaInicio.getFullYear(),
+        fechaInicio.getMonth(),
+        fechaInicio.getDate()
+      );
+
+      const ahora = new Date();
+      const hoy = new Date(
+        ahora.getFullYear(),
+        ahora.getMonth(),
+        ahora.getDate()
+      );
+
+      const diferencia = Math.floor((hoy - inicio) / 86400000);
+      return Math.max(1, diferencia + 1);
+    }
+
+    function obtenerSeguimientoAutomatico(data) {
+      const fechaInicio = parsearFechaSeguimiento(data);
+      const dias = diasTranscurridosDesde(fechaInicio);
+
+      const etapasConfiguradas =
+        Array.isArray(data.seguimientoEtapas) && data.seguimientoEtapas.length
+          ? data.seguimientoEtapas
+          : [
+              { desde: 1, hasta: 7, estado: "EN PROCESO" },
+              { desde: 8, hasta: 10, estado: "CONFIRMADO" },
+              { desde: 11, hasta: 15, estado: "EN ESPERA DE DESENLACE" },
+              { desde: 16, hasta: 30, estado: "EN ESPERA DE EMISIÓN BANCARIA" }
+            ];
+
+      let etapaIndex = etapasConfiguradas.findIndex(
+        etapa => dias >= etapa.desde && dias <= etapa.hasta
+      );
+
+      if (etapaIndex === -1) {
+        etapaIndex = dias > 30 ? etapasConfiguradas.length - 1 : 0;
+      }
+
+      const etapaEncontrada = etapasConfiguradas[etapaIndex];
+      const progreso = Math.min(100, Math.max(3, Math.round((dias / 30) * 100)));
+
+      const estado = dias > 30
+        ? "PLAZO ESTIMADO CUMPLIDO - PENDIENTE DE ACTUALIZACIÓN"
+        : etapaEncontrada.estado;
+
+      let tiempo;
+      if (dias <= 7) {
+        tiempo = `Día ${dias} de seguimiento · Proceso inicial`;
+      } else if (dias <= 10) {
+        tiempo = `Día ${dias} de seguimiento · Confirmación del proceso`;
+      } else if (dias <= 15) {
+        tiempo = `Día ${dias} de seguimiento · En espera de desenlace`;
+      } else if (dias <= 30) {
+        tiempo = `Día ${dias} de seguimiento · En espera de emisión bancaria`;
+      } else {
+        tiempo = `Han transcurrido ${dias} días desde la solicitud · Pendiente de actualización`;
+      }
+
+      return {
+        etapa: etapaIndex + 1,
+        progreso,
+        estado,
+        tiempo,
+        dias
+      };
+    }
+
+    function obtenerAvance(data) {
+      if (data.seguimientoAutomatico === true) {
+        return obtenerSeguimientoAutomatico(data);
+      }
+
+      const estadoNormalizado = String(data.estado || "").trim().toUpperCase();
+      const automatico = estadosProgreso[estadoNormalizado] || { etapa: 1, progreso: 25 };
+
+      return {
+        etapa: Number.isFinite(Number(data.etapaActual))
+          ? Number(data.etapaActual)
+          : automatico.etapa,
+        progreso: Number.isFinite(Number(data.progreso))
+          ? Number(data.progreso)
+          : automatico.progreso,
+        estado: data.estado || "PENDIENTE DE ACTUALIZACIÓN",
+        tiempo: data.tiempo || "Pendiente de actualización"
+      };
+    }
+
+    function mostrarDatoOpcional(rowId, cellId, valor) {
+      const row = document.getElementById(rowId);
+      const cell = document.getElementById(cellId);
+
+      if (valor !== undefined && valor !== null && String(valor).trim() !== "") {
+        cell.textContent = valor;
+        row.style.display = "";
+      } else {
+        cell.textContent = "";
+        row.style.display = "none";
+      }
+    }
 
     const codeInput = document.getElementById("refundCode");
     const searchBtn = document.getElementById("searchBtn");
@@ -573,25 +807,35 @@
     }
 
     function mostrarResultado(data) {
+      const avance = obtenerAvance(data);
+
       document.getElementById("viewCode").textContent = data.codigo;
       document.getElementById("codeCell").textContent = data.codigo;
       document.getElementById("amountCell").textContent = formatoMoneda(data.monto);
       document.getElementById("dateCell").textContent = data.fecha;
-      document.getElementById("statusCell").textContent = data.estado;
-      document.getElementById("timeCell").textContent = data.tiempo;
+      document.getElementById("statusCell").textContent = avance.estado;
+      document.getElementById("timeCell").textContent = avance.tiempo;
+
+      // Estos campos son opcionales. Aparecen automáticamente si el
+      // bloque generado por el otro sistema contiene la información.
+      mostrarDatoOpcional("productRow", "productCell", data.producto);
+      mostrarDatoOpcional("modelRow", "modelCell", data.modelo);
+      mostrarDatoOpcional("clientRow", "clientCell", data.cliente);
+      mostrarDatoOpcional("branchRow", "branchCell", data.sucursal);
+      mostrarDatoOpcional("reasonRow", "reasonCell", data.motivo);
 
       const steps = document.getElementById("steps");
       steps.innerHTML = etapas.map((etapa, index) => {
         let clase = "step";
-        if (index < data.etapaActual - 1) clase += " done";
-        if (index === data.etapaActual - 1) clase += " current";
+        if (index < avance.etapa - 1) clase += " done";
+        if (index === avance.etapa - 1) clase += " current";
         return `<span class="${clase}">${index + 1}. ${etapa}</span>`;
       }).join("");
 
       result.classList.add("show");
 
       setTimeout(() => {
-        progressBar.style.width = data.progreso + "%";
+        progressBar.style.width = avance.progreso + "%";
         result.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }
