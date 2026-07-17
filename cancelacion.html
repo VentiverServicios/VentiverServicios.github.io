@@ -368,9 +368,23 @@ document.addEventListener("DOMContentLoaded", () => {
   fecha: "${data.fecha}",
   estado: "CANCELACIÓN REGISTRADA",
   motivo: ${JSON.stringify(data.motivo)},
-  tiempo: "Pendiente de revisión y seguimiento",
-  etapaActual: 1,
-  progreso: 25
+
+  // Seguimiento automático por días.
+  // El sistema de consulta usará la fecha de cancelación para calcular
+  // automáticamente la etapa, el estado y la barra de progreso.
+  seguimientoAutomatico: true,
+
+  // Etapas previstas para el sistema de consulta:
+  // Día 1 al 7   -> EN PROCESO
+  // Día 8 al 10  -> CONFIRMADO
+  // Día 11 al 15 -> EN ESPERA DE DESENLACE
+  // Día 16 al 30 -> EN ESPERA DE EMISIÓN BANCARIA
+  seguimientoEtapas: [
+    { desde: 1, hasta: 7, estado: "EN PROCESO" },
+    { desde: 8, hasta: 10, estado: "CONFIRMADO" },
+    { desde: 11, hasta: 15, estado: "EN ESPERA DE DESENLACE" },
+    { desde: 16, hasta: 30, estado: "EN ESPERA DE EMISIÓN BANCARIA" }
+  ]
 }`;
   }
 
