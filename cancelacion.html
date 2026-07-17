@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de códigos de cancelación | Ventiver</title>
+<style>
+:root{
+  --bg:#edf5fb;
+  --panel:#f7fbfe;
+  --panel2:#e6f1f8;
+  --line:#b8cddd;
+  --blue:#315f84;
+  --blue2:#47799e;
+  --text:#263746;
+  --muted:#6e8292;
+  --green:#2f7658;
+  --red:#9f4a4a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Verdana,Arial,sans-serif;
+  font-size:13px;
+  color:var(--text);
+  background:
+    repeating-linear-gradient(0deg,#eef6fb,#eef6fb 25px,#e7f1f8 26px);
+}
+.topbar{
+  padding:7px 10px;
+  background:#dcebf6;
+  border-bottom:1px solid var(--line);
+  color:var(--blue);
+}
+.wrap{
+  width:min(980px,calc(100% - 20px));
+  margin:auto;
+}
+header{
+  text-align:center;
+  padding:30px 10px 20px;
+}
+header h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:normal;
+  color:var(--blue);
+}
+header p{color:var(--muted)}
+.board-title{
+  border-bottom:1px solid var(--line);
+  padding:7px 2px;
+  color:var(--blue);
+  font-weight:bold;
+}
+.post{
+  display:block;
+  width:min(760px,100%);
+  margin:16px 0;
+  padding:9px 12px 14px;
+  background:var(--panel2);
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.post-head{margin-bottom:10px}
+.subject{font-weight:bold;color:#244e72}
+.name{font-weight:bold;color:var(--green)}
+.quote{color:#577f9e;margin:8px 0 12px}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.field{display:flex;flex-direction:column;gap:5px}
+.field.full{grid-column:1/-1}
+label{font-weight:bold;color:#315f84}
+input,select,textarea{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #9db9cf;
+  background:#fff;
+  color:var(--text);
+  font:inherit;
+  outline:none;
+}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus{
+  border-color:#5e8fb4;
+  box-shadow:0 0 0 3px rgba(94,143,180,.12);
+}
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+button,a.button{
+  padding:9px 14px;
+  border:1px solid #789ab5;
+  background:linear-gradient(#fff,#dbeaf5);
+  color:#284e6c;
+  cursor:pointer;
+  font:inherit;
+  text-decoration:none;
+}
+button:hover,a.button:hover{background:linear-gradient(#fff,#cfe3f1)}
+.result{
+  display:none;
+  margin-top:18px;
+  padding:12px;
+  background:#f8fcff;
+  border:1px solid var(--line);
+}
+.result.show{display:block}
+.code{
+  font-size:23px;
+  font-weight:bold;
+  color:#244e72;
+  letter-spacing:1px;
+  padding:10px;
+  background:#fff;
+  border:1px dashed #8daec5;
+  margin:8px 0 12px;
+  word-break:break-all;
+}
+.notice{
+  margin-top:12px;
+  padding:10px;
+  border-left:3px solid #6e9cbd;
+  background:#f5faff;
+  line-height:1.5;
+}
+.warning{
+  border-left-color:#bd8a45;
+  background:#fffaf1;
+}
+.copybox{
+  width:100%;
+  min-height:210px;
+  font-family:Consolas,monospace;
+  font-size:12px;
+}
+.history{
+  margin-top:10px;
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+}
+.history th,.history td{
+  border:1px solid var(--line);
+  padding:7px;
+  text-align:left;
+}
+.history th{background:#e6f1f8;color:#315f84}
+footer{
+  width:min(980px,calc(100% - 20px));
+  margin:12px auto 20px;
+  border-top:1px solid var(--line);
+  padding-top:8px;
+  color:var(--muted);
+  font-size:11px;
+}
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+}
+</style>
+</head>
+<body>
+<div class="topbar">[ Ventiver ] [ Cancelaciones ] [ Generador de códigos ]</div>
+
+<div class="wrap">
+<header>
+  <h1>Generador de códigos de cancelación</h1>
+  <p>Registro interno para equipos Ventiver</p>
+</header>
+
+<div class="board-title">/cancelaciones/ - Alta de solicitud</div>
+
+<section class="post">
+  <div class="post-head">
+    <span class="subject">Nueva cancelación</span>
+    <span class="name"> Ventiver</span>
+  </div>
+
+  <div class="quote">&gt; Completa los datos del equipo y genera un código único.</div>
+
+  <div class="notice">
+    <strong>¿Cómo enviar la cancelación?</strong><br>
+    1. Llena los datos del extractor, cliente, sucursal y motivo de cancelación.<br>
+    2. Presiona <strong>Generar código</strong>.<br>
+    3. Revisa el código generado.<br>
+    4. Presiona <strong>Mandar correo</strong>.<br>
+    5. Se abrirá el correo dirigido a <strong>devlogic.services@gmail.com</strong> con todos los datos de la cancelación ya preparados. Solo confirma el envío desde tu aplicación de correo.
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label for="tipo">Nombre del extractor</label>
+      <input id="tipo" type="text" placeholder='Ejemplo: Tubo axial, Extractor centrífugo...'>
+    </div>
+
+    <div class="field">
+      <label for="medida">Medida / diámetro</label>
+      <input id="medida" placeholder='Ejemplo: 18"'>
+    </div>
+
+    <div class="field">
+      <label for="modelo">Modelo o referencia</label>
+      <input id="modelo" placeholder="Ejemplo: TA-18">
+    </div>
+
+    <div class="field">
+      <label for="cliente">Cliente / solicitante</label>
+      <input id="cliente" placeholder="Nombre del cliente">
+    </div>
+
+    <div class="field">
+      <label for="sucursal">Sucursal</label>
+      <input id="sucursal" placeholder="Ejemplo: Matriz Miguel Alemán">
+    </div>
+
+    <div class="field">
+      <label for="fecha">Fecha de cancelación</label>
+      <input id="fecha" type="date">
+    </div>
+
+    <div class="field">
+      <label for="monto">Monto relacionado</label>
+      <input id="monto" type="number" min="0" step="0.01" placeholder="0.00">
+    </div>
+
+    <div class="field full">
+      <label for="motivo">Motivo de la cancelación</label>
+      <textarea id="motivo" placeholder="Describe brevemente el motivo..."></textarea>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="generarBtn">Generar código</button>
+    <button id="limpiarBtn" type="button">Limpiar</button>
+  </div>
+
+  <div id="resultado" class="result">
+    <strong>Código generado:</strong>
+    <div id="codigoGenerado" class="code"></div>
+
+    <div class="actions">
+      <button id="copiarCodigoBtn">Copiar código</button>
+      <a id="correoBtn" class="button" href="#">Mandar correo</a>
+    </div>
+
+    <div class="notice">
+      El botón <strong>Mandar correo</strong> abrirá tu aplicación de correo con el destinatario
+      <strong>devlogic.services@gmail.com</strong>. El mensaje incluirá automáticamente el código, equipo,
+      sucursal, cliente, fecha, monto y motivo de cancelación. Solo revisa la información y confirma el envío.
+    </div>
+
+    <h3>Bloque listo para agregar al seguimiento</h3>
+    <textarea id="bloqueCodigo" class="copybox" readonly></textarea>
+
+    <div class="actions">
+      <button id="copiarBloqueBtn">Copiar bloque</button>
+    </div>
+  </div>
+</section>
+
+<section class="post">
+  <div class="post-head">
+    <span class="subject">Historial local</span>
+    <span class="name"> Códigos generados en este navegador</span>
+  </div>
+  <div class="quote">&gt; Evita repetir códigos en este dispositivo.</div>
+  <div id="historial"></div>
+</section>
+</div>
+
+<footer>
+  Ventiver Servicios · Generador interno de códigos de cancelación
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const STORAGE_KEY = "ventiver_codigos_cancelacion_v1";
+
+  const $ = id => document.getElementById(id);
+
+  const tipo = $("tipo");
+  const medida = $("medida");
+  const modelo = $("modelo");
+  const cliente = $("cliente");
+  const sucursal = $("sucursal");
+  const fecha = $("fecha");
+  const monto = $("monto");
+  const motivo = $("motivo");
+  const resultado = $("resultado");
+  const codigoGenerado = $("codigoGenerado");
+  const bloqueCodigo = $("bloqueCodigo");
+  const correoBtn = $("correoBtn");
+
+  fecha.value = new Date().toISOString().slice(0,10);
+
+  function getRegistros() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveRegistros(registros) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(registros));
+  }
+
+  function slugEquipo(nombre) {
+    const limpio = nombre
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"")
+      .toUpperCase()
+      .replace(/[^A-Z0-9 ]/g," ")
+      .trim();
+
+    const palabras = limpio.split(/\s+/).filter(Boolean);
+    if (!palabras.length) return "EQ";
+    if (palabras.length === 1) return palabras[0].slice(0,3);
+    return palabras.map(p => p[0]).join("").slice(0,4);
+  }
+
+  function soloNumerosMedida(valor) {
+    const n = valor.match(/\d+/);
+    return n ? n[0] : "00";
+  }
+
+  function crearCodigoUnico(tipoEquipo, medidaEquipo, fechaValor) {
+    const prefijo = slugEquipo(tipoEquipo);
+    const medidaNum = soloNumerosMedida(medidaEquipo);
+    const year = new Date(fechaValor + "T12:00:00").getFullYear();
+
+    const existentes = new Set(getRegistros().map(r => r.codigo));
+    let codigo;
+
+    do {
+      const aleatorio = Math.random().toString(36).slice(2,6).toUpperCase();
+      const tiempo = Date.now().toString(36).slice(-4).toUpperCase();
+      codigo = `${prefijo}-${medidaNum}-${year}-${aleatorio}${tiempo}`;
+    } while (existentes.has(codigo));
+
+    return codigo;
+  }
+
+  function formatoMoneda(valor) {
+    const numero = Number(valor || 0);
+    return new Intl.NumberFormat("es-MX", {
+      style:"currency",
+      currency:"MXN"
+    }).format(numero);
+  }
+
+  function generarBloque(data) {
+    return `// Agregar este registro al objeto de seguimientos:
+"${data.codigo}": {
+  codigo: "${data.codigo}",
+  producto: "${data.tipo}${data.medida ? ' ' + data.medida : ''}",
+  modelo: "${data.modelo}",
+  cliente: "${data.cliente}",
+  sucursal: "${data.sucursal}",
+  monto: ${Number(data.monto || 0).toFixed(2)},
+  fecha: "${data.fecha}",
+  estado: "CANCELACIÓN REGISTRADA",
+  motivo: ${JSON.stringify(data.motivo)},
+  tiempo: "Pendiente de revisión y seguimiento",
+  etapaActual: 1,
+  progreso: 25
+}`;
+  }
+
+  function renderHistorial() {
+    const registros = getRegistros().slice().reverse();
+    if (!registros.length) {
+      $("historial").innerHTML = "<p>No hay códigos generados todavía en este navegador.</p>";
+      return;
+    }
+
+    $("historial").innerHTML = `
+      <table class="history">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Equipo</th>
+            <th>Sucursal</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${registros.map(r => `
+            <tr>
+              <td>${r.codigo}</td>
+              <td>${r.tipo} ${r.medida}</td>
+              <td>${r.sucursal || "—"}</td>
+              <td>${r.fecha}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>`;
+  }
+
+  $("generarBtn").addEventListener("click", () => {
+    if (!tipo.value || !medida.value.trim() || !fecha.value) {
+      alert("Completa al menos el nombre del extractor, la medida y la fecha.");
+      return;
+    }
+
+    const codigo = crearCodigoUnico(tipo.value, medida.value, fecha.value);
+
+    const data = {
+      codigo,
+      tipo: tipo.value,
+      medida: medida.value.trim(),
+      modelo: modelo.value.trim(),
+      cliente: cliente.value.trim(),
+      sucursal: sucursal.value.trim(),
+      fecha: fecha.value,
+      monto: monto.value,
+      motivo: motivo.value.trim()
+    };
+
+    const registros = getRegistros();
+    registros.push(data);
+    saveRegistros(registros);
+
+    codigoGenerado.textContent = codigo;
+    bloqueCodigo.value = generarBloque(data);
+
+    const asunto = `Nueva cancelación Ventiver - ${codigo}`;
+    const cuerpo = [
+      "NUEVA SOLICITUD DE CANCELACIÓN",
+      "",
+      `Código: ${codigo}`,
+      `Equipo: ${data.tipo}`,
+      `Medida: ${data.medida}`,
+      `Modelo: ${data.modelo || "No especificado"}`,
+      `Cliente / solicitante: ${data.cliente || "No especificado"}`,
+      `Sucursal: ${data.sucursal || "No especificada"}`,
+      `Fecha de cancelación: ${data.fecha}`,
+      `Monto: ${formatoMoneda(data.monto)}`,
+      `Motivo: ${data.motivo || "No especificado"}`,
+      "",
+      "Bloque para sistema de seguimiento:",
+      "",
+      generarBloque(data)
+    ].join("\n");
+
+    correoBtn.href =
+      "mailto:devlogic.services@gmail.com" +
+      "?subject=" + encodeURIComponent(asunto) +
+      "&body=" + encodeURIComponent(cuerpo);
+
+    resultado.classList.add("show");
+    renderHistorial();
+    resultado.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  $("copiarCodigoBtn").addEventListener("click", async () => {
+    await navigator.clipboard.writeText(codigoGenerado.textContent);
+    alert("Código copiado.");
+  });
+
+  $("copiarBloqueBtn").addEventListener("click", async () => {
+    await navigator.clipboard.writeText(bloqueCodigo.value);
+    alert("Bloque copiado.");
+  });
+
+  $("limpiarBtn").addEventListener("click", () => {
+    tipo.value = "";
+    medida.value = "";
+    modelo.value = "";
+    cliente.value = "";
+    sucursal.value = "";
+    fecha.value = new Date().toISOString().slice(0,10);
+    monto.value = "";
+    motivo.value = "";
+    resultado.classList.remove("show");
+  });
+
+  renderHistorial();
+});
+</script>
+</body>
+</html>
