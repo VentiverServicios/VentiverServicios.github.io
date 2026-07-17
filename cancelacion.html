@@ -256,11 +256,16 @@ footer{
       sucursal, cliente, fecha, monto y motivo de cancelación. Solo revisa la información y confirma el envío.
     </div>
 
-    <h3>Bloque listo para agregar al seguimiento</h3>
+    <h3>Bloque listo para pegar directamente en el consultador</h3>
     <textarea id="bloqueCodigo" class="copybox" readonly></textarea>
 
     <div class="actions">
-      <button id="copiarBloqueBtn">Copiar bloque</button>
+      <button id="copiarBloqueBtn">Copiar bloque listo para pegar</button>
+    </div>
+
+    <div class="notice">
+      Este bloque ya incluye la <strong>coma inicial</strong> necesaria para agregarlo debajo de otro registro
+      dentro de <strong>const reembolsos = { ... }</strong>. No necesitas modificarlo antes de pegarlo.
     </div>
   </div>
 </section>
@@ -357,7 +362,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function generarBloque(data) {
-    return `// Agregar este registro al objeto de seguimientos:
+    return `// Pega este bloque DEBAJO del último registro dentro de const reembolsos = {
+// La coma inicial ya viene incluida para evitar errores al pegar.
+
+,
 "${data.codigo}": {
   codigo: "${data.codigo}",
   producto: "${data.tipo}${data.medida ? ' ' + data.medida : ''}",
@@ -366,7 +374,6 @@ document.addEventListener("DOMContentLoaded", () => {
   sucursal: "${data.sucursal}",
   monto: ${Number(data.monto || 0).toFixed(2)},
   fecha: "${data.fecha}",
-  estado: "CANCELACIÓN REGISTRADA",
   motivo: ${JSON.stringify(data.motivo)},
 
   // Seguimiento automático por días.
