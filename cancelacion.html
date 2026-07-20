@@ -265,7 +265,9 @@ footer{
 
     <div class="notice">
       Este bloque ya incluye la <strong>coma inicial</strong> necesaria para agregarlo debajo de otro registro
-      dentro de <strong>const reembolsos = { ... }</strong>. No necesitas modificarlo antes de pegarlo.
+      dentro de <strong>const reembolsos = { ... }</strong>. También incluye
+      <strong>reembolsoReflejado: false</strong> por defecto. Cuando el reembolso ya se haya reflejado,
+      puedes cambiarlo a <strong>true</strong> directamente en el consultador.
     </div>
   </div>
 </section>
@@ -375,6 +377,11 @@ document.addEventListener("DOMContentLoaded", () => {
   monto: ${Number(data.monto || 0).toFixed(2)},
   fecha: "${data.fecha}",
   motivo: ${JSON.stringify(data.motivo)},
+
+  // Estado manual del reembolso reflejado.
+  // false = OFF -> Aún no se refleja.
+  // true  = ON  -> Ya se reflejó y el consultador lo mostrará al 100%.
+  reembolsoReflejado: false,
 
   // Seguimiento automático por días.
   // El sistema de consulta usará la fecha de cancelación para calcular
