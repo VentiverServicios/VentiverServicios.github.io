@@ -347,6 +347,36 @@
       line-height:1.55;
     }
 
+
+    .refund-switch{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      font-weight:bold;
+    }
+
+    .refund-switch .pill{
+      display:inline-block;
+      min-width:42px;
+      text-align:center;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:11px;
+      border:1px solid;
+    }
+
+    .refund-switch.on .pill{
+      color:#1f6f4a;
+      background:#e9f8f0;
+      border-color:#8bc5a6;
+    }
+
+    .refund-switch.off .pill{
+      color:#8b5a31;
+      background:#fff6eb;
+      border-color:#d4b38f;
+    }
+
     .back-area{
       margin-top:18px;
     }
@@ -451,6 +481,14 @@
             <tr>
               <th>Estado actual</th>
               <td id="statusCell" class="state"></td>
+            </tr>
+            <tr>
+              <th>Reembolso reflejado</th>
+              <td id="reflectedCell"></td>
+            </tr>
+            <tr id="reflectedDateRow" style="display:none">
+              <th>Fecha de reflejo</th>
+              <td id="reflectedDateCell"></td>
             </tr>
             <tr id="productRow" style="display:none">
               <th>Producto / equipo</th>
@@ -565,6 +603,19 @@
       etapaActual: 1, 2, 3 o 4
       progreso: 25, 50, 75 o 100
 
+      PARA MARCAR QUE EL REEMBOLSO YA SE REFLEJÓ:
+      reembolsoReflejado: true  -> ON
+      reembolsoReflejado: false -> OFF
+
+      Opcionalmente puedes agregar:
+      fechaReflejado: "20 de julio de 2026"
+      horaReflejado: "1:00 PM"
+
+      Cuando esté en ON, el consultador mostrará automáticamente:
+      - REEMBOLSO REFLEJADO
+      - Barra al 100%
+      - Fecha y hora en que se reflejó
+
       EJEMPLO FALSO (NO es un código real):
       "ABC-00-0000": {
         codigo: "ABC-00-0000",
@@ -595,12 +646,20 @@
         fecha: "19 de junio de 2026",
         fechaISO: "2026-06-19",
         motivo: "Seguimiento de reembolso",
+
+        // INTERRUPTOR MANUAL DEL REEMBOLSO:
+        // true  = ON  -> El reembolso YA se reflejó.
+        // false = OFF -> El reembolso todavía NO se refleja.
+        reembolsoReflejado: true,
+        fechaReflejado: "20 de julio de 2026",
+        horaReflejado: "1:00 PM",
+
         seguimientoAutomatico: true,
         seguimientoEtapas: [
           { desde: 1, hasta: 7, estado: "EN PROCESO" },
           { desde: 8, hasta: 10, estado: "CONFIRMADO" },
           { desde: 11, hasta: 15, estado: "EN ESPERA DE DESENLACE" },
-          { desde: 16, hasta: 30, estado: "EN ESPERA DE EMISIÓN BANCARIA" }
+          { desde: 16, hasta: 50, estado: "EN ESPERA DE EMISIÓN BANCARIA" }
         ]
       }
 
@@ -751,6 +810,25 @@
     }
 
     function obtenerAvance(data) {
+      // Si el interruptor está en ON, este estado tiene prioridad sobre
+      // cualquier cálculo automático por días.
+      if (data.reembolsoReflejado === true) {
+        const fechaHora = [
+          data.fechaReflejado || "",
+          data.horaReflejado || ""
+        ].filter(Boolean).join(" a las ");
+
+        return {
+          etapa: 4,
+          progreso: 100,
+          estado: "REEMBOLSO REFLEJADO",
+          tiempo: fechaHora
+            ? `Reembolso realizado y reflejado el ${fechaHora}`
+            : "Reembolso realizado y reflejado",
+          dias: null
+        };
+      }
+
       if (data.seguimientoAutomatico === true) {
         return obtenerSeguimientoAutomatico(data);
       }
@@ -815,6 +893,28 @@
       document.getElementById("dateCell").textContent = data.fecha;
       document.getElementById("statusCell").textContent = avance.estado;
       document.getElementById("timeCell").textContent = avance.tiempo;
+
+      const reflectedCell = document.getElementById("reflectedCell");
+      const reflectedDateRow = document.getElementById("reflectedDateRow");
+      const reflectedDateCell = document.getElementById("reflectedDateCell");
+
+      if (data.reembolsoReflejado === true) {
+        reflectedCell.innerHTML =
+          '<span class="refund-switch on"><span class="pill">ON</span> Sí, ya se reflejó</span>';
+
+        const fechaHora = [
+          data.fechaReflejado || "",
+          data.horaReflejado || ""
+        ].filter(Boolean).join(" a las ");
+
+        reflectedDateCell.textContent = fechaHora || "Fecha no especificada";
+        reflectedDateRow.style.display = "";
+      } else {
+        reflectedCell.innerHTML =
+          '<span class="refund-switch off"><span class="pill">OFF</span> Aún no se refleja</span>';
+        reflectedDateCell.textContent = "";
+        reflectedDateRow.style.display = "none";
+      }
 
       // Estos campos son opcionales. Aparecen automáticamente si el
       // bloque generado por el otro sistema contiene la información.
